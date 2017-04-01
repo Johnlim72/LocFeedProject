@@ -49,20 +49,6 @@
             android:layout_height="wrap_content"
             android:singleLine="true" />
 
-
-        <TextView
-            android:id="@+id/email_signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="E-mail" />
-
-        <EditText
-            android:id="@+id/email_ET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true" />
-
-
         <TextView
             android:id="@+id/password_signUp"
             android:layout_width="wrap_content"

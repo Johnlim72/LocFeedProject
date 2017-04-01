@@ -22,7 +22,7 @@ import java.net.URLEncoder;
 
 public class SignUpActivity extends AppCompatActivity{
 
-    private String f_name, l_name, user_id, email, password, re_password;
+    private String f_name, l_name, user_id, password, re_password;
 
     ProgressDialog progressDialog;
 
@@ -45,14 +45,12 @@ public class SignUpActivity extends AppCompatActivity{
         f_name_et = (EditText) findViewById(R.id.first_name_ET);
         l_name_et = (EditText) findViewById(R.id.last_name_ET);
         user_id_et = (EditText) findViewById(R.id.user_id_ET);
-        email_et = (EditText) findViewById(R.id.email_ET);
         password_et = (EditText) findViewById(R.id.password_ET);
         re_password_et = (EditText) findViewById(R.id.re_password_ET);
 
         f_name = f_name_et.getText().toString();
         l_name = l_name_et.getText().toString();
         user_id = user_id_et.getText().toString();
-        email = email_et.getText().toString();
         password = password_et.getText().toString();
         re_password = re_password_et.getText().toString();
 
@@ -61,11 +59,11 @@ public class SignUpActivity extends AppCompatActivity{
             System.out.println("Re_Password: " + re_password);
             Toast toast = Toast.makeText(getApplicationContext(), "Passwords Don't Match!", Toast.LENGTH_LONG);
             toast.show();
-        } else if(f_name.equals("") || l_name.equals("") || user_id.equals("") || email.equals("") || password.equals("")){
+        } else if(f_name.equals("") || l_name.equals("") || user_id.equals("") || password.equals("")){
             Toast toast = Toast.makeText(getApplicationContext(), "All Fields Are Required!", Toast.LENGTH_LONG);
             toast.show();
         } else {
-            new CreateNewUser().execute(f_name, l_name, user_id, email, password);
+            new CreateNewUser().execute(f_name, l_name, user_id, password);
         }
     }
 
@@ -91,8 +89,6 @@ public class SignUpActivity extends AppCompatActivity{
                         URLEncoder.encode(l_name, "UTF-8");
                 data += "&" + URLEncoder.encode("user_id", "UTF-8") + "=" +
                         URLEncoder.encode(user_id, "UTF-8");
-                data += "&" + URLEncoder.encode("email", "UTF-8") + "=" +
-                        URLEncoder.encode(email, "UTF-8");
                 data += "&" + URLEncoder.encode("u_password", "UTF-8") + "=" +
                         URLEncoder.encode(password, "UTF-8");
 
@@ -136,10 +132,18 @@ public class SignUpActivity extends AppCompatActivity{
             System.out.println("onPost: s = " + s);
             progressDialog.hide();
 
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            if (s.equals("Success!")) {
+                Toast.makeText(SignUpActivity.this, "Sucessfully created user", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
 
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+            } else {
+                Toast.makeText(SignUpActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 }
