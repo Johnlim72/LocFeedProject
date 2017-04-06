@@ -41,8 +41,6 @@ public class EventCreateActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_create);
 
-
-
     }
 
     @SuppressWarnings("deprecation")
