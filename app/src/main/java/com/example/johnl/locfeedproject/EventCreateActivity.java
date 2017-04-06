@@ -28,6 +28,8 @@ import java.util.Calendar;
 public class EventCreateActivity extends Activity {
     private Calendar calendar;
 
+    private boolean already_set_date, already_set_start_time, already_set_end_time;
+
     int year, month, day, startHour, startMinute, endHour, endMinute;
 
     String event_date, start_time, end_time;
@@ -65,17 +67,29 @@ public class EventCreateActivity extends Activity {
             month = calendar.get(Calendar.MONTH);
             day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            return new DatePickerDialog(this, myDateListener, year, month, day);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, myDateListener, year, month, day);
+
+            datePickerDialog.setTitle("Event Date");
+
+            return datePickerDialog;
         } else if(id == 2){
             startHour = calendar.get(Calendar.HOUR);
             startMinute = calendar.get(Calendar.MINUTE);
 
-            return new TimePickerDialog(this, myStartTimeListener, startHour, startMinute, true);
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, myStartTimeListener, startHour, startMinute, true);
+
+            timePickerDialog.setTitle("Event Start Time");
+
+            return timePickerDialog;
         } else if(id == 3){
             endHour = calendar.get(Calendar.HOUR);
             endMinute = calendar.get(Calendar.MINUTE);
 
-            return new TimePickerDialog(this, myEndTimeListener, endHour, endMinute, true);
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, myEndTimeListener, endHour, endMinute, true);
+
+            timePickerDialog.setTitle("Event End Time");
+
+            return timePickerDialog;
         }
         return null;
     }
@@ -85,6 +99,12 @@ public class EventCreateActivity extends Activity {
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             event_date = year + "-" + month + "-" + day;
             System.out.println(event_date);
+
+            already_set_date = true;
+
+            if(already_set_start_time == false){
+                showDialog(2);
+            }
         }
     };
 
@@ -101,6 +121,12 @@ public class EventCreateActivity extends Activity {
             }
             start_time = hour_string + ":" + minute_string + ":00";
             System.out.println(start_time);
+
+            already_set_start_time = true;
+
+            if(already_set_end_time == false){
+                showDialog(3);
+            }
         }
     };
 
@@ -117,6 +143,8 @@ public class EventCreateActivity extends Activity {
             }
             end_time = hour_string + ":" + minute_string + ":00";
             System.out.println(end_time);
+
+            already_set_end_time = true;
         }
     };
 
@@ -124,8 +152,8 @@ public class EventCreateActivity extends Activity {
         EditText event_header_ET = (EditText) findViewById(R.id.event_header);
         EditText event_description_ET = (EditText) findViewById(R.id.event_description);
 
-        event_header = event_header_ET.getText().toString();
-        event_description = event_description_ET.getText().toString();
+        event_header = event_header_ET.getText().toString().replaceAll("'", "''");
+        event_description = event_description_ET.getText().toString().replaceAll("'", "''");
 
         new CreateNewEvent().execute(event_header, event_description, start_time, end_time, event_date);
     }
