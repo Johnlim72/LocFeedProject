@@ -58,9 +58,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Temple, Philadelphia, PA,
         // and move the map's camera to the same location.
-        LatLng temple = new LatLng(39.98, -75.158);
-        googleMap.addMarker(new MarkerOptions().position(temple).title("Marker at Temple University"));
+        LatLng temple = new LatLng(39.98065114940919, -75.15505135059357);
+        googleMap.addMarker(new MarkerOptions().position(temple).title("Tuttleman Building"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(temple, 15));
+
+        LatLng serc = new LatLng(39.98167960047677, -75.1530547141374);
+        googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));
 
         googleMap.getUiSettings();
         mUiSettings = googleMap.getUiSettings();
