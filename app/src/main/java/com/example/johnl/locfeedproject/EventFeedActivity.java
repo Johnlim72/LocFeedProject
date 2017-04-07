@@ -27,7 +27,7 @@ public class EventFeedActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        listView=(ListView)findViewById(R.id.list);
+        listView=(ListView)findViewById(R.id.event_list);
 
         eventModels = new ArrayList<>();
         eventModels.add(new EventModel("Event", "TuDev event", "Monil", "40", "5:00-", "7:00", "March 23"));

@@ -26,7 +26,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //  setSupportActionBar(toolbar);
 
-        listView=(ListView)findViewById(R.id.list);
+        listView=(ListView)findViewById(R.id.question_list);
 
         questionModels = new ArrayList<>();
         questionModels.add(new QuestionModel("Where is the event?", "Monil", "4.3"));
