@@ -194,7 +194,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(String result){
             super.onPostExecute(result);
-            Log.i("Result is", result);
         }
     }
 }
