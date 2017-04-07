@@ -50,8 +50,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        new GetLocations().execute();
     }
 
     /**
@@ -76,6 +74,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));*/
 
+        new GetLocations().execute(googleMap);
+
         googleMap.getUiSettings();
         mUiSettings = googleMap.getUiSettings();
         mUiSettings.setZoomControlsEnabled(true);
@@ -93,7 +93,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
-    private class GetLocations extends AsyncTask<Void, Void, Void>{
+    private class GetLocations extends AsyncTask<GoogleMap, GoogleMap, GoogleMap>{
 
         @Override
         protected void onPreExecute(){
@@ -101,9 +101,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         @Override
-        protected Void doInBackground(Void... arg0){
+        protected GoogleMap doInBackground(GoogleMap... arg0){
             try{
-
                 String link = "https://locfeed.000webhostapp.com/android_connect/get_locations.php";
                 URL url = new URL(link);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -146,8 +145,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 double longitude = Double.parseDouble(location.getString("longitude"));
 
                                 LatLng newLocation = new LatLng(latitude, longitude);
-                                googleMap.addMarker(new MarkerOptions().position(newLocation).title(location_name));
-                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
+                                arg0[0].addMarker(new MarkerOptions().position(newLocation).title(location_name));
+                                arg0[0].moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
                             }
                         } catch(final JSONException e){
                             Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
@@ -171,7 +170,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         @Override
-        protected void onPostExecute(Void result){
+        protected void onPostExecute(GoogleMap result){
             super.onPostExecute(result);
         }
     }
