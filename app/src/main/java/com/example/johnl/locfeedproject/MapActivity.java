@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 /**
@@ -37,6 +38,9 @@ import java.net.URL;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private UiSettings mUiSettings;
+
+    ArrayList<String> location_names;
+    ArrayList<Double> latitudes, longitudes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));*/
 
-        new GetLocations().execute(googleMap);
+        Object result = new GetLocations().execute();
+
+        for(int i = 0; i < location_names.size(); i++){
+            LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
+            googleMap.addMarker(new MarkerOptions().position(newLocation).title(location_names.get(i)));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
+        }
 
         mUiSettings = googleMap.getUiSettings();
         mUiSettings.setZoomControlsEnabled(true);
@@ -90,7 +100,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
-    private class GetLocations extends AsyncTask<GoogleMap, GoogleMap, GoogleMap>{
+    private class GetLocations extends AsyncTask<Void, Void, Void>{
 
         @Override
         protected void onPreExecute(){
@@ -98,7 +108,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         @Override
-        protected GoogleMap doInBackground(GoogleMap... arg0){
+        protected Void doInBackground(Void... arg0){
             try{
                 String link = "https://locfeed.000webhostapp.com/android_connect/get_locations.php";
                 URL url = new URL(link);
@@ -145,9 +155,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 System.out.println("latitude: " + latitude);
                                 System.out.println("longitude: " + longitude);
 
-                                LatLng newLocation = new LatLng(latitude, longitude);
-                                arg0[0].addMarker(new MarkerOptions().position(newLocation).title(location_name));
-                                arg0[0].moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
+                                location_names.add(location_name);
+                                latitudes.add(latitude);
+                                longitudes.add(longitude);
                             }
                         } catch(final JSONException e){
                             Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
@@ -171,7 +181,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         @Override
-        protected void onPostExecute(GoogleMap result){
+        protected void onPostExecute(Void result){
             super.onPostExecute(result);
         }
     }
