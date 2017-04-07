@@ -38,6 +38,7 @@ import java.util.ArrayList;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private UiSettings mUiSettings;
+    private GoogleMap googleMap;
 
     ArrayList<String> location_names;
     ArrayList<Double> latitudes, longitudes;
@@ -76,12 +77,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));*/
 
-        Object result;
-
-        while((result = new GetLocations().execute()) != null){
-            continue;
+        try{
+            String result = new GetLocations().execute().get();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
-
 
         for(int i = 0; i < location_names.size(); i++){
             LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
@@ -105,7 +105,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
-    private class GetLocations extends AsyncTask<Void, Void, Void>{
+    private class GetLocations extends AsyncTask<Void, Void, String>{
 
         @Override
         protected void onPreExecute(){
@@ -113,7 +113,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         @Override
-        protected Void doInBackground(Void... arg0){
+        protected String doInBackground(Void... arg0){
             try{
                 String link = "https://locfeed.000webhostapp.com/android_connect/get_locations.php";
                 URL url = new URL(link);
@@ -186,8 +186,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         @Override
-        protected void onPostExecute(Void result){
+        protected void onPostExecute(String result){
             super.onPostExecute(result);
+            Log.i("Result is", result);
         }
     }
 }
