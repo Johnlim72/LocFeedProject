@@ -46,8 +46,6 @@ public class EventFeedActivity extends AppCompatActivity {
         adapter = new EventAdapter(eventModels, getApplicationContext());
 
         new GetEvents().execute();
-
-        System.out.println("At end of On Create");
     }
 
     private class GetEvents extends AsyncTask<Void, Void, Void>{
@@ -147,7 +145,6 @@ public class EventFeedActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result){
             super.onPostExecute(result);
-            System.out.println("On Post Execute");
             listView.setAdapter(adapter);
         }
 
