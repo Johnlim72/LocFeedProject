@@ -30,17 +30,17 @@ public class EventFeedActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.list);
 
         eventModels = new ArrayList<>();
-        eventModels.add(new EventModel("Event", "TuDev event", "Monil", "40", "5:00-", "7:00"));
-        eventModels.add(new EventModel("Event2", "TuDev event2", "John", "32", "7:00-", "9:00"));
-        eventModels.add(new EventModel("party!!", "Party", "Jae", "90", "6:00-", "9:00"));
-        eventModels.add(new EventModel("party2", "TuDev event", "Hai", "72", "5:00 -", "7:00"));
-        eventModels.add(new EventModel("Event3", "TuDev event", "Frank","100","5:00 -", "7:00"));
-        eventModels.add(new EventModel("Event4", "TuDev event", "Lenny","241","1:00-", "4:00"));
-        eventModels.add(new EventModel("Event5", "TuDev event", "George","1242", "3:00-", "5:00"));
-        eventModels.add(new EventModel("Event11", "TuDev event", "Peter","102", "5:00 -", "7:00"));
-        eventModels.add(new EventModel("Event125", "TuDev event", "Shahram","56", "2:00 -", "6:00"));
-        eventModels.add(new EventModel("Event454", "TuDev event", "Noah","345", "9:00 -", "12:00"));
-        eventModels.add(new EventModel("Event34", "TuDev event", "Monil","34", "5:00 -", "7:00"));
+        eventModels.add(new EventModel("Event", "TuDev event", "Monil", "40", "5:00-", "7:00", "March 23"));
+        eventModels.add(new EventModel("Event2", "TuDev event2", "John", "32", "7:00-", "9:00", "April 4"));
+        eventModels.add(new EventModel("party!!", "Party", "Jae", "90", "6:00-", "9:00", "April 1"));
+        eventModels.add(new EventModel("party2", "TuDev event", "Hai", "72", "5:00 -", "7:00", "March 4"));
+        eventModels.add(new EventModel("Event3", "TuDev event", "Frank","100","5:00 -", "7:00", "November 9"));
+        eventModels.add(new EventModel("Event4", "TuDev event", "Lenny","241","1:00-", "4:00", "December 13"));
+        eventModels.add(new EventModel("Event5", "TuDev event", "George","1242", "3:00-", "5:00", "January 3"));
+        eventModels.add(new EventModel("Event11", "TuDev event", "Peter","102", "5:00 -", "7:00", "March 8"));
+        eventModels.add(new EventModel("Event125", "TuDev event", "Shahram","56", "2:00 -", "6:00", "May 18"));
+        eventModels.add(new EventModel("Event454", "TuDev event", "Noah","345", "9:00 -", "12:00", "May 20"));
+        eventModels.add(new EventModel("Event34", "TuDev event", "Monil","34", "5:00 -", "7:00", "April 22"));
 
         adapter= new EventAdapter(eventModels,getApplicationContext());
 

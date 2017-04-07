@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/fillInfo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:background="#aed6f1">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:text="Title" />
+            android:text="Title"
+            style="@style/text1"/>
 
         <EditText
             android:id="@+id/event_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1" />
+            android:maxLines="1"
+            style="@style/editTextStyle1"/>
 
         <TextView
             android:layout_width="wrap_content"

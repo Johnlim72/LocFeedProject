@@ -28,6 +28,7 @@ public class EventAdapter extends ArrayAdapter<EventModel> implements View.OnCli
         TextView userRep;
         TextView timeStart;
         TextView timeEnd;
+        TextView date;
     }
 
     public EventAdapter(ArrayList<EventModel> data, Context context) {
@@ -73,6 +74,7 @@ public class EventAdapter extends ArrayAdapter<EventModel> implements View.OnCli
             viewHolder.userRep = (TextView) convertView.findViewById(R.id.userRep);
             viewHolder.timeStart = (TextView) convertView.findViewById(R.id.timeStart);
             viewHolder.timeEnd = (TextView) convertView.findViewById(R.id.timeEnd);
+            viewHolder.date= (TextView) convertView.findViewById(R.id.date);
             result=convertView;
             convertView.setTag(viewHolder);
         } else {
@@ -90,6 +92,7 @@ public class EventAdapter extends ArrayAdapter<EventModel> implements View.OnCli
         viewHolder.userRep.setText("  " + eventModel.getUserRep());
         viewHolder.timeStart.setText(eventModel.getTimeStart());
         viewHolder.timeEnd.setText(eventModel.getTimeEnd());
+        viewHolder.date.setText(eventModel.getDate());
         viewHolder.description.setOnClickListener(this);
         viewHolder.description.setTag(position);
         // Return the completed view to render on screen

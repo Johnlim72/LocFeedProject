@@ -12,15 +12,17 @@ public class EventModel {
     String userRep;
     String timeStart;
     String timeEnd;
+    String date;
 
 
-    public EventModel(String name, String description, String user, String userRep, String timeStart, String timeEnd ) {
+    public EventModel(String name, String description, String user, String userRep, String timeStart, String timeEnd, String date ) {
         this.name=name;
         this.description=description;
         this.user=user;
         this.userRep=userRep;
         this.timeStart=timeStart;
         this.timeEnd=timeEnd;
+        this.date=date;
     }
 
 
@@ -46,5 +48,6 @@ public class EventModel {
         return timeEnd;
     }
 
+    public String getDate() { return date; }
 }
 
