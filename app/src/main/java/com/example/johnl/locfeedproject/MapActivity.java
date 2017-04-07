@@ -50,6 +50,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        new GetLocations().execute();
     }
 
     /**
@@ -73,8 +75,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LatLng serc = new LatLng(39.98167960047677, -75.1530547141374);
         googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));*/
-
-        new GetLocations().execute();
 
         googleMap.getUiSettings();
         mUiSettings = googleMap.getUiSettings();
