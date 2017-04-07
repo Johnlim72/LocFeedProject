@@ -164,7 +164,7 @@ public class EventCreateActivity extends Activity {
         new CreateNewEvent().execute(event_header, event_description, start_time, end_time, event_date);
     }
 
-    class CreateNewEvent extends AsyncTask<String, String, String>{
+    private class CreateNewEvent extends AsyncTask<String, String, String>{
         @Override
         protected void onPreExecute(){
             super.onPreExecute();

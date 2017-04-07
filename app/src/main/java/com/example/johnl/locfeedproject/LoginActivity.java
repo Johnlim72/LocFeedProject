@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity{
         }
     }
 
-    class LoginUser extends AsyncTask<String, String, String>{
+    private class LoginUser extends AsyncTask<String, String, String>{
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
