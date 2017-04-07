@@ -38,8 +38,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private UiSettings mUiSettings;
 
-    GoogleMap googleMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +74,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         new GetLocations().execute(googleMap);
 
-        googleMap.getUiSettings();
         mUiSettings = googleMap.getUiSettings();
         mUiSettings.setZoomControlsEnabled(true);
         mUiSettings.setZoomGesturesEnabled(true);
@@ -143,6 +140,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 String location_name = location.getString("location_name");
                                 double latitude = Double.parseDouble(location.getString("latitude"));
                                 double longitude = Double.parseDouble(location.getString("longitude"));
+
+                                System.out.println("location_name: " + location_name);
+                                System.out.println("latitude: " + latitude);
+                                System.out.println("longitude: " + longitude);
 
                                 LatLng newLocation = new LatLng(latitude, longitude);
                                 arg0[0].addMarker(new MarkerOptions().position(newLocation).title(location_name));
