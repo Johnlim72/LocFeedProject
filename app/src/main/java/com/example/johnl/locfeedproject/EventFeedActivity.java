@@ -118,7 +118,7 @@ public class EventFeedActivity extends AppCompatActivity {
 
                                 System.out.println("Event Header = " + event_header);
 
-                                eventModels.add(new EventModel(event_header, event_description, "test_user", "test_rep", start_time, end_time));
+                                eventModels.add(new EventModel(event_header, event_description, "test_user", "test_rep", start_time, end_time, event_date));
                             }
 
 
