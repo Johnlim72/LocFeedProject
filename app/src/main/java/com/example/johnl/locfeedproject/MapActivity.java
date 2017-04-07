@@ -77,11 +77,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));*/
 
+        location_names = new ArrayList<String>();
+        latitudes = new ArrayList<Double>();
+        longitudes = new ArrayList<Double>();
+
         try{
             String result = new GetLocations().execute().get();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
+
+
 
         for(int i = 0; i < location_names.size(); i++){
             LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
