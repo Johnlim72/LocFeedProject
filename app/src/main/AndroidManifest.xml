@@ -20,11 +20,6 @@
         <activity android:name=".SplashScreen" />
         <activity android:name=".TestActivity" />
         <activity android:name=".EventCreateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -32,10 +27,12 @@
             android:value="AIzaSyBQRE5Jl_5XOnC6k1T4XrQO4n-iuM68pXU" />
 
         <activity android:name=".ChooseActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
-            </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".QuestionFeedActivity" />
         <activity android:name=".EventFeedActivity"
             android:theme="@style/AppTheme.NoActionBar" >

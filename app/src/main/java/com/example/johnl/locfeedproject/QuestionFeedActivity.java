@@ -3,10 +3,9 @@ package com.example.johnl.locfeedproject;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -26,7 +25,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //  setSupportActionBar(toolbar);
 
-        listView=(ListView)findViewById(R.id.list);
+        listView=(ListView)findViewById(R.id.question_list);
 
         questionModels = new ArrayList<>();
         questionModels.add(new QuestionModel("Where is the event?", "Monil", "4.3"));

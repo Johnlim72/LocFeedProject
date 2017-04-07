@@ -67,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity{
         }
     }
 
-    class CreateNewUser extends AsyncTask<String, String, String>{
+    private class CreateNewUser extends AsyncTask<String, String, String>{
 
         @Override
         protected void onPreExecute(){

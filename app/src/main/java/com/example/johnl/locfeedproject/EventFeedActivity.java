@@ -1,24 +1,36 @@
 package com.example.johnl.locfeedproject;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class EventFeedActivity extends AppCompatActivity {
 
-
     ArrayList<EventModel> eventModels;
-    ListView listView;
-    private static EventAdapter adapter;
+    private ListView listView;
+    private EventAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,34 +39,118 @@ public class EventFeedActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        listView=(ListView)findViewById(R.id.list);
+        listView = (ListView)findViewById(R.id.event_list);
 
         eventModels = new ArrayList<>();
-        eventModels.add(new EventModel("Event", "TuDev event", "Monil", "40", "5:00-", "7:00"));
-        eventModels.add(new EventModel("Event2", "TuDev event2", "John", "32", "7:00-", "9:00"));
-        eventModels.add(new EventModel("party!!", "Party", "Jae", "90", "6:00-", "9:00"));
-        eventModels.add(new EventModel("party2", "TuDev event", "Hai", "72", "5:00 -", "7:00"));
-        eventModels.add(new EventModel("Event3", "TuDev event", "Frank","100","5:00 -", "7:00"));
-        eventModels.add(new EventModel("Event4", "TuDev event", "Lenny","241","1:00-", "4:00"));
-        eventModels.add(new EventModel("Event5", "TuDev event", "George","1242", "3:00-", "5:00"));
-        eventModels.add(new EventModel("Event11", "TuDev event", "Peter","102", "5:00 -", "7:00"));
-        eventModels.add(new EventModel("Event125", "TuDev event", "Shahram","56", "2:00 -", "6:00"));
-        eventModels.add(new EventModel("Event454", "TuDev event", "Noah","345", "9:00 -", "12:00"));
-        eventModels.add(new EventModel("Event34", "TuDev event", "Monil","34", "5:00 -", "7:00"));
 
-        adapter= new EventAdapter(eventModels,getApplicationContext());
+        adapter = new EventAdapter(eventModels, getApplicationContext());
 
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        new GetEvents().execute();
 
-                EventModel eventModel = eventModels.get(position);
+        System.out.println("At end of On Create");
+    }
 
-                Snackbar.make(view, eventModel.getName()+"\n"+ eventModel.getDescription()+" User: "+ eventModel.getUser(), Snackbar.LENGTH_LONG)
-                        .setAction("No action", null).show();
+    private class GetEvents extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            try{
+                String link = "https://locfeed.000webhostapp.com/android_connect/get_events_test.php";
+                URL url = new URL(link);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
+                String data = URLEncoder.encode("location_id", "UTF-8") +
+                        URLEncoder.encode("1", "UTF-8");
+
+                wr.write(data);
+                wr.flush();
+
+                int responseCode = conn.getResponseCode();
+
+                if(responseCode == HttpURLConnection.HTTP_OK){
+                    InputStream in = new BufferedInputStream(conn.getInputStream());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb = new StringBuilder();
+
+                    String line;
+                    try{
+                        while((line = reader.readLine()) != null){
+                            sb.append(line).append('\n');
+                        }
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            in.close();
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    String jsonString = sb.toString();
+
+                    Log.e("JSON String Tag", "Response from URL: " + jsonString);
+
+                    System.out.println("Before jsonString != null");
+                    if(jsonString != null){
+                        try{
+                            JSONObject jsonObject = new JSONObject(jsonString);
+
+                            JSONArray events = jsonObject.getJSONArray("events");
+
+                            for(int i = 0; i < events.length(); i++){
+                                JSONObject event = events.getJSONObject(i);
+                                String event_header = event.getString("event_header");
+                                String event_description = event.getString("event_description");
+                                String event_date = event.get("event_date").toString();
+                                String start_time = event.get("start_time").toString();
+                                String end_time = event.get("end_time").toString();
+
+                                System.out.println("Event Header = " + event_header);
+
+                                eventModels.add(new EventModel(event_header, event_description, "test_user", "test_rep", start_time, end_time));
+                            }
+
+
+
+                        } catch (final JSONException e){
+                            Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Json parsing error: " + e.getMessage(),
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    }
+
+                }
+                
+            } catch (Exception e){
+                System.out.println("Error: " + e.getMessage());
             }
-        });
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            super.onPostExecute(result);
+            System.out.println("On Post Execute");
+            listView.setAdapter(adapter);
+        }
+
     }
 
     @Override
