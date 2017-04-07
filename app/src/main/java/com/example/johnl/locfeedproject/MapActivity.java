@@ -1,5 +1,6 @@
 package com.example.johnl.locfeedproject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ArrayList<String> location_names;
     ArrayList<Double> latitudes, longitudes;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +79,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));*/
 
-        Object result = new GetLocations().execute();
+        new GetLocations().execute();
 
         for(int i = 0; i < location_names.size(); i++){
             LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
@@ -105,6 +108,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
+            progressDialog = new ProgressDialog(getApplicationContext());
+            progressDialog.setMessage("Getting Locations");
+            progressDialog.show();
         }
 
         @Override
@@ -183,6 +189,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(Void result){
             super.onPostExecute(result);
+            progressDialog.hide();
         }
     }
 }
