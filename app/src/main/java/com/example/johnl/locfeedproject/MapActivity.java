@@ -1,6 +1,5 @@
 package com.example.johnl.locfeedproject;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,8 +41,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     ArrayList<String> location_names;
     ArrayList<Double> latitudes, longitudes;
-
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,9 +110,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            progressDialog = new ProgressDialog(getApplicationContext());
-            progressDialog.setMessage("Getting Locations");
-            progressDialog.show();
         }
 
         @Override
@@ -194,7 +188,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(Void result){
             super.onPostExecute(result);
-            progressDialog.hide();
         }
     }
 }
