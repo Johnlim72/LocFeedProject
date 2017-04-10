@@ -1,81 +1,100 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="110dp"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    >
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="Event"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/black" />
-
+        android:text="TUDev Meeting Event Join Now!"
+        android:textSize="20dp"
+        android:textColor="#ec7063"
+        style="@style/text2"/>
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
-        android:layout_marginTop="5dp"
-        android:text="TUDev Meeting, bring your laptops"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="2dp"
+        android:text="TUDev Meeting, bring your laptops, pizza, meet friends and code as you wish!"
+        style="@style/text2" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="March 2"
-        android:layout_marginRight="50dp"
+        style="@style/text2"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="#17202a"
          />
 
     <TextView
         android:id="@+id/timeStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
         android:text="5:00 -"
-        android:textColor="@android:color/black"/>
+        style="@style/text2"
+        android:layout_toRightOf="@id/date"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="2dp"
+        android:textColor="#17202a"/>
 
     <TextView
         android:id="@+id/timeEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="7:00"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:layout_below="@id/timeStart"
-        android:textColor="@android:color/black"/>
+        style="@style/text2"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/timeStart"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="#17202a"/>
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/userRep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:text="  4.3"
+        style="@style/text2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentRight="true"
+        android:textColor="#17202a"/>
 
-        <TextView
-            android:id="@+id/user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Monil:"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monil,"
+        style="@style/text2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="2dp"
+        android:layout_toLeftOf="@id/userRep"
+        android:textColor="#17202a"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="by: "
+        style="@style/text2"
+        android:layout_toLeftOf="@id/user"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="#17202a"/>
 
 
-        <TextView
-            android:id="@+id/userRep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="  4.3"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
 
-    </LinearLayout>
+
 
 </RelativeLayout>

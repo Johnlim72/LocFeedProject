@@ -4,16 +4,19 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context="com.example.monil.locfeed.MainActivity">
-
+    tools:context="com.example.monil.locfeed.MainActivity"
+    android:background="#ffecb3">
 
     <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="340dp"
-  
-    android:src="@drawable/logo" />
+        android:id="@+id/locfeedlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/locfeed_logo"
+        android:layout_marginBottom="290dp"
+        android:layout_alignParentTop="true"
+        android:scaleY=".75"
+        android:scaleX=".75"
+        />
 
     <RelativeLayout
         android:id="@+id/initial_buttons"
@@ -25,24 +28,19 @@
 
         <Button
             android:id="@+id/login_button"
-            style="@style/AppTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/button1"
+
             android:layout_centerHorizontal="true"
             android:layout_marginTop="300dp"
-            android:background="#eeeeee"
             android:onClick="onLoginClick"
             android:text="Login" />
 
         <Button
             android:id="@+id/signup_button"
-            style="@style/AppTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/button2"
             android:layout_below="@id/login_button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:background="#eeeeee"
             android:onClick="onSignUpClick"
             android:text="Sign up" />
 

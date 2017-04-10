@@ -4,7 +4,8 @@
     android:id="@+id/activity_sign_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:padding="16dp" >
+    android:background="#ffecb3"
+    android:padding="16dp">
 
     <LinearLayout
         android:id="@+id/signUpInfo"
@@ -15,84 +16,77 @@
 
         <TextView
             android:id="@+id/firstName_signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text1"
             android:text="First Name " />
 
         <EditText
             android:id="@+id/first_name_ET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/editTextStyle1"
             android:singleLine="true" />
 
         <TextView
             android:id="@+id/lastName_signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text1"
+            android:layout_marginTop="8dp"
             android:text="Last Name" />
 
         <EditText
             android:id="@+id/last_name_ET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/editTextStyle1"
             android:singleLine="true" />
 
         <TextView
             android:id="@+id/userId_signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text1"
+            android:layout_marginTop="8dp"
             android:text="User ID" />
 
         <EditText
             android:id="@+id/user_id_ET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/editTextStyle1"
             android:singleLine="true" />
 
         <TextView
             android:id="@+id/password_signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text1"
+            android:layout_marginTop="8dp"
             android:text="Password" />
 
         <EditText
             android:id="@+id/password_ET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/editTextStyle1"
             android:singleLine="true" />
 
         <TextView
             android:id="@+id/re_signUp"
+            style="@style/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Re-enter Password" />
 
         <EditText
             android:id="@+id/re_password_ET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/editTextStyle1"
             android:singleLine="true" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/submit_signUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/button1"
         android:layout_below="@id/signUpInfo"
         android:layout_centerHorizontal="true"
-        android:background="#eeeeee"
+        android:layout_marginTop="20dp"
         android:onClick="onSubmitClick"
         android:text="Submit" />
 
     <Button
         android:id="@+id/cancel_signUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/button2"
         android:layout_below="@id/submit_signUp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:background="#eeeeee"
+        android:layout_marginTop="16dp"
         android:onClick="onCancelClick"
         android:text="Cancel" />
 

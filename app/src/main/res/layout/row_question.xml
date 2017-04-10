@@ -9,9 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="Question?"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/black" />
+        android:text="How much could a wood chuck chuck if a wood chuck could chuck wood?"
+        android:textColor="#ec7063"
+        style="@style/text2"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,10 +21,15 @@
         android:orientation="horizontal"
         android:layout_below="@id/question" >
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by: "
+            android:textColor="@android:color/black"/>
+        <TextView
             android:id="@+id/user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monil:"
+            android:text="Monil, "
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
@@ -32,7 +38,7 @@
             android:id="@+id/userRep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  4.3"
+            android:text=" 4.3"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/black"
             android:textStyle="bold" />

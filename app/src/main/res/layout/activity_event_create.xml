@@ -9,10 +9,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible"
-        android:background="#aed6f1">
+        android:background="#ffecb3">
 
         <TextView
             android:text="Title"
+            android:layout_marginTop="16dp"
             style="@style/text1"/>
 
         <EditText
@@ -27,12 +28,9 @@
 
         <EditText
             android:id="@+id/event_description"
-            android:maxLines="1"
             style="@style/editTextStyle2"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
@@ -42,8 +40,6 @@
             android:text="Set Date"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
@@ -53,8 +49,6 @@
             style="@style/button1"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
@@ -64,11 +58,9 @@
             android:text="Set End Time"/>
 
         <Button
-            android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:text="Create Event"
             style="@style/button2"
             android:onClick="createEvent"/>
