@@ -1,6 +1,8 @@
 package com.example.johnl.locfeedproject;
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,12 +35,23 @@ public class EventFeedActivity extends AppCompatActivity {
     private ListView listView;
     private EventAdapter adapter;
 
+    ProgressDialog progressDialog;
+
+    private String location_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        location_id = "2";
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            location_id = extras.getString("LocationID");
+        }
 
         listView = (ListView)findViewById(R.id.event_list);
 
@@ -46,6 +60,13 @@ public class EventFeedActivity extends AppCompatActivity {
         adapter = new EventAdapter(eventModels, getApplicationContext());
 
         new GetEvents().execute();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
+        intent.putExtra("LocationID", location_id);
+        startActivity(intent);
     }
 
     private class GetEvents extends AsyncTask<Void, Void, Void>{
@@ -59,7 +80,7 @@ public class EventFeedActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             try{
-                String link = "https://locfeed.000webhostapp.com/android_connect/get_events_test.php";
+                String link = "https://locfeed.000webhostapp.com/android_connect/get_events.php";
                 URL url = new URL(link);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true);
@@ -67,8 +88,8 @@ public class EventFeedActivity extends AppCompatActivity {
 
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 
-                String data = URLEncoder.encode("location_id", "UTF-8") +
-                        URLEncoder.encode("1", "UTF-8");
+                String data = URLEncoder.encode("location_id", "UTF-8") + "=" +
+                        URLEncoder.encode(location_id, "UTF-8");
 
                 wr.write(data);
                 wr.flush();
@@ -83,6 +104,7 @@ public class EventFeedActivity extends AppCompatActivity {
                     String line;
                     try{
                         while((line = reader.readLine()) != null){
+                            System.out.println("Line = " + line);
                             sb.append(line).append('\n');
                         }
                     } catch (IOException e){
@@ -100,40 +122,45 @@ public class EventFeedActivity extends AppCompatActivity {
                     Log.e("JSON String Tag", "Response from URL: " + jsonString);
 
                     System.out.println("Before jsonString != null");
-                    if(jsonString != null){
-                        try{
-                            JSONObject jsonObject = new JSONObject(jsonString);
 
-                            JSONArray events = jsonObject.getJSONArray("events");
+                    if (jsonString != null) {
+                        if(jsonString.equals("No results")){
+                            Toast.makeText(getApplicationContext(), "No Events!", Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                JSONObject jsonObject = new JSONObject(jsonString);
 
-                            for(int i = 0; i < events.length(); i++){
-                                JSONObject event = events.getJSONObject(i);
-                                String event_header = event.getString("event_header");
-                                String event_description = event.getString("event_description");
-                                String event_date = event.get("event_date").toString();
-                                String start_time = event.get("start_time").toString();
-                                String end_time = event.get("end_time").toString();
+                                JSONArray events = jsonObject.getJSONArray("events");
 
-                                System.out.println("Event Header = " + event_header);
+                                for (int i = 0; i < events.length(); i++) {
+                                    JSONObject event = events.getJSONObject(i);
+                                    String event_header = event.getString("event_header");
+                                    String event_description = event.getString("event_description");
+                                    String event_date = event.get("event_date").toString();
+                                    String start_time = event.get("start_time").toString();
+                                    start_time = start_time.substring(0, 5);
+                                    String end_time = event.get("end_time").toString();
+                                    end_time = end_time.substring(0, 5);
 
-                                eventModels.add(new EventModel(event_header, event_description, "test_user", "test_rep", start_time, end_time, event_date));
-                            }
+                                    System.out.println("Event Header = " + event_header);
 
-
-
-                        } catch (final JSONException e){
-                            Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Json parsing error: " + e.getMessage(),
-                                            Toast.LENGTH_LONG).show();
+                                    eventModels.add(new EventModel(event_header, event_description, "test_user", "test_rep", start_time, end_time, event_date));
                                 }
-                            });
+
+
+                            } catch (final JSONException e) {
+                                Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),
+                                                "JSON Parsing Error: " + e.getMessage(),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
                         }
                     }
-
                 }
                 
             } catch (Exception e){
@@ -169,5 +196,11 @@ public class EventFeedActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onCreateEventClick(View view){
+        Intent intent = new Intent(getApplicationContext(), EventCreateActivity.class);
+        intent.putExtra("LocationID", location_id);
+        startActivity(intent);
     }
 }

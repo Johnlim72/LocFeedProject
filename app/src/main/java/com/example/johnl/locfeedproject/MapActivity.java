@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -38,10 +39,11 @@ import java.util.ArrayList;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private UiSettings mUiSettings;
-    private GoogleMap googleMap;
+    private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
 
     ArrayList<String> location_names;
     ArrayList<Double> latitudes, longitudes;
+    ArrayList<Integer> location_ids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,19 +69,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        // Add a marker in Temple, Philadelphia, PA,
-        // and move the map's camera to the same location.
-        /*LatLng temple = new LatLng(39.98065114940919, -75.15505135059357);
-        googleMap.addMarker(new MarkerOptions().position(temple).title("Tuttleman Building"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(temple, 15));
-
-        LatLng serc = new LatLng(39.98167960047677, -75.1530547141374);
-        googleMap.addMarker(new MarkerOptions().position(serc).title("SERC"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(serc, 15));*/
-
         location_names = new ArrayList<String>();
         latitudes = new ArrayList<Double>();
         longitudes = new ArrayList<Double>();
+        location_ids = new ArrayList<Integer>();
 
         try{
             String result = new GetLocations().execute().get();
@@ -91,8 +84,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         for(int i = 0; i < location_names.size(); i++){
             LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
-            googleMap.addMarker(new MarkerOptions().position(newLocation).title(location_names.get(i)));
+            Marker marker = googleMap.addMarker(new MarkerOptions().position(newLocation).title(location_names.get(i)));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
+            mHashMap.put(marker, location_ids.get(i));
         }
 
         mUiSettings = googleMap.getUiSettings();
@@ -103,9 +97,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Intent bringFeed = new Intent(MapActivity.this, TestActivity.class);
+                Intent bringFeed = new Intent(MapActivity.this, ChooseActivity.class);
+                bringFeed.putExtra("LocationID", mHashMap.get(marker).toString());
                 startActivity(bringFeed);
-
                 return false;
             }
         });
@@ -161,6 +155,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 String location_name = location.getString("location_name");
                                 double latitude = Double.parseDouble(location.getString("latitude"));
                                 double longitude = Double.parseDouble(location.getString("longitude"));
+                                int location_id = Integer.parseInt(location.getString("id"));
 
                                 System.out.println("location_name: " + location_name);
                                 System.out.println("latitude: " + latitude);
@@ -169,6 +164,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 location_names.add(location_name);
                                 latitudes.add(latitude);
                                 longitudes.add(longitude);
+                                location_ids.add(location_id);
                             }
                         } catch(final JSONException e){
                             Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());

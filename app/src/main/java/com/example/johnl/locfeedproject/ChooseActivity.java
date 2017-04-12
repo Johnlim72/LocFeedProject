@@ -9,9 +9,18 @@ import android.view.WindowManager;
 
 public class ChooseActivity extends AppCompatActivity {
 
+    String location_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle extras = getIntent().getExtras();
+        location_id = "2";
+        if(extras != null){
+            location_id = extras.getString("LocationID");
+        }
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -20,6 +29,8 @@ public class ChooseActivity extends AppCompatActivity {
 
     public void onEventClick(View view){
         Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
+        intent.putExtra("LocationID", location_id);
+
         startActivity(intent);
 
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -27,6 +38,7 @@ public class ChooseActivity extends AppCompatActivity {
 
     public void onQuestionClick(View view){
         Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
+        intent.putExtra("LocationID", location_id);
         startActivity(intent);
 
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

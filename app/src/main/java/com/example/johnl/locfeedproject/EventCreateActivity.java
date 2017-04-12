@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +31,9 @@ import java.util.Calendar;
 public class EventCreateActivity extends Activity {
     private Calendar calendar;
 
-    private boolean already_set_date, already_set_start_time, already_set_end_time;
+    private String location_id;
+
+    private boolean already_set_start_time, already_set_end_time;
 
     int year, month, day, startHour, startMinute, endHour, endMinute;
 
@@ -43,6 +46,12 @@ public class EventCreateActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        location_id = "2";
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            location_id = extras.getString("LocationID");
+        }
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -106,8 +115,6 @@ public class EventCreateActivity extends Activity {
             event_date = year + "-" + month + "-" + day;
             System.out.println(event_date);
 
-            already_set_date = true;
-
             if(already_set_start_time == false){
                 showDialog(2);
             }
@@ -164,6 +171,13 @@ public class EventCreateActivity extends Activity {
         new CreateNewEvent().execute(event_header, event_description, start_time, end_time, event_date);
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
+        intent.putExtra("LocationID", location_id);
+        startActivity(intent);
+    }
+
     private class CreateNewEvent extends AsyncTask<String, String, String>{
         @Override
         protected void onPreExecute(){
@@ -189,6 +203,8 @@ public class EventCreateActivity extends Activity {
                         URLEncoder.encode(event_date, "UTF-8");
                 data += "&" + URLEncoder.encode("event_description", "UTF-8") + "=" +
                         URLEncoder.encode(event_description, "UTF-8");
+                data += "&" + URLEncoder.encode("location_id", "UTF-8") + "=" +
+                        URLEncoder.encode(location_id, "UTF-8");
 
 
                 System.out.println(data);
@@ -230,6 +246,9 @@ public class EventCreateActivity extends Activity {
             System.out.println("onPost s:" + s);
             if(s.equals("Success!")){
                 Toast.makeText(getApplicationContext(), "Successfully Created Event", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
+                intent.putExtra("LocationID", location_id);
+                startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "Error While Creating Event", Toast.LENGTH_LONG).show();
             }

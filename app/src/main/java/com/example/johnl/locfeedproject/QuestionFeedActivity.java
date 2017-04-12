@@ -1,5 +1,6 @@
 package com.example.johnl.locfeedproject;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -34,12 +35,18 @@ public class QuestionFeedActivity extends AppCompatActivity {
     ListView listView;
     private QuestionAdapter adapter;
 
+    private String location_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_feed);
-        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //  setSupportActionBar(toolbar);
+
+        location_id = "2";
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            location_id = extras.getString("LocationID");
+        }
 
         listView=(ListView)findViewById(R.id.question_list);
 
@@ -61,6 +68,13 @@ public class QuestionFeedActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
+        intent.putExtra("LocationID", location_id);
+        startActivity(intent);
+    }
+
     private class GetQuestions extends AsyncTask<Void, Void, Void>{
 
         @Override
@@ -71,7 +85,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0){
             try{
-                String link = "https://locfeed.000webhostapp.com/android_connect/get_questions_test.php";
+                String link = "https://locfeed.000webhostapp.com/android_connect/get_questions.php";
                 URL url = new URL(link);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true);
@@ -79,8 +93,8 @@ public class QuestionFeedActivity extends AppCompatActivity {
 
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 
-                String data = URLEncoder.encode("location_id", "UTF-8") +
-                        URLEncoder.encode("1", "UTF-8");
+                String data = URLEncoder.encode("location_id", "UTF-8") + "=" +
+                        URLEncoder.encode(location_id, "UTF-8");
 
                 wr.write(data);
                 wr.flush();
@@ -113,34 +127,36 @@ public class QuestionFeedActivity extends AppCompatActivity {
 
                     System.out.println("Before jsonString != null");
                     if(jsonString != null){
-                        try{
-                            JSONObject jsonObject = new JSONObject(jsonString);
+                        if(jsonString.equals("No results")){
+                            Toast.makeText(getApplicationContext(), "No Questions!", Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                JSONObject jsonObject = new JSONObject(jsonString);
 
-                            JSONArray questions = jsonObject.getJSONArray("questions");
+                                JSONArray questions = jsonObject.getJSONArray("questions");
 
-                            for(int i = 0; i < questions.length(); i++){
-                                JSONObject question = questions.getJSONObject(i);
-                                String question_details = question.getString("question_details");
-                                String user_id = question.getString("user_id");
+                                for (int i = 0; i < questions.length(); i++) {
+                                    JSONObject question = questions.getJSONObject(i);
+                                    String question_details = question.getString("question_details");
+                                    String user_id = question.getString("user_id");
 
-                                questionModels.add(new QuestionModel(question_details, "test_user", "test_rep"));
-                            }
-
-
-
-                        } catch (final JSONException e){
-                            Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Json parsing error: " + e.getMessage(),
-                                            Toast.LENGTH_LONG).show();
+                                    questionModels.add(new QuestionModel(question_details, "test_user", "test_rep"));
                                 }
-                            });
+
+
+                            } catch (final JSONException e) {
+                                Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),
+                                                "No Questions!",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
                         }
                     }
-
                 }
 
             } catch (Exception e){
@@ -175,5 +191,11 @@ public class QuestionFeedActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onQuestionCreateClick(View view){
+        Intent intent = new Intent(getApplicationContext(), QuestionCreateActivity.class);
+        intent.putExtra("LocationID", location_id);
+        startActivity(intent);
     }
 }
