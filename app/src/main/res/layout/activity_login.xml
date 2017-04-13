@@ -13,7 +13,6 @@
         android:scaleY=".75"
         android:scaleX=".75"
         android:layout_above="@id/fillInfo"
-
         />
 
     <LinearLayout

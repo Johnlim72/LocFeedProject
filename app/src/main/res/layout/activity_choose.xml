@@ -32,6 +32,15 @@
             android:onClick="onQuestionClick"
             />
 
+        <Button
+            android:id="@+id/backButton"
+            android:text="choose location"
+            style="@style/button1"
+            android:layout_below="@id/questionButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"
+            android:onClick="onChooseLocationClick"
+            />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

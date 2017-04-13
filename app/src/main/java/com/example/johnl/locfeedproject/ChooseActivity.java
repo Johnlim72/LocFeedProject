@@ -55,4 +55,13 @@ public class ChooseActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
+
+    public void onChooseLocationClick(View view){
+        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+        intent.putExtra("LocationID", location_id);
+
+        startActivity(intent);
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 }
