@@ -1,7 +1,6 @@
 package com.example.johnl.locfeedproject;
 
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,9 +34,7 @@ public class EventFeedActivity extends AppCompatActivity {
     private ListView listView;
     private EventAdapter adapter;
 
-    ProgressDialog progressDialog;
-
-    private String location_id;
+    private String location_id, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +44,12 @@ public class EventFeedActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         location_id = "2";
+        id = "0";
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             location_id = extras.getString("LocationID");
+            id = extras.getString("id");
         }
 
         listView = (ListView)findViewById(R.id.event_list);
@@ -141,10 +140,12 @@ public class EventFeedActivity extends AppCompatActivity {
                                     start_time = start_time.substring(0, 5);
                                     String end_time = event.get("end_time").toString();
                                     end_time = end_time.substring(0, 5);
+                                    String user_id = event.getString("user_id");
+                                    String user_reputation = event.getString("user_reputation");
 
                                     System.out.println("Event Header = " + event_header);
 
-                                    eventModels.add(new EventModel(event_header, event_description, "test_user", "test_rep", start_time, end_time, event_date));
+                                    eventModels.add(new EventModel(event_header, event_description, user_id, user_reputation, start_time, end_time, event_date));
                                 }
 
 
@@ -201,6 +202,7 @@ public class EventFeedActivity extends AppCompatActivity {
     public void onCreateEventClick(View view){
         Intent intent = new Intent(getApplicationContext(), EventCreateActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }

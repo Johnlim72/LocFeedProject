@@ -27,16 +27,18 @@ public class QuestionCreateActivity extends Activity {
     String question_details;
     ProgressDialog progressDialog;
 
-    private String location_id;
+    private String location_id, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
         location_id = "2";
+        id = "0";
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             location_id = extras.getString("LocationID");
+            id = extras.getString("id");
         }
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -57,6 +59,7 @@ public class QuestionCreateActivity extends Activity {
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 
@@ -79,6 +82,8 @@ public class QuestionCreateActivity extends Activity {
                         URLEncoder.encode(question_details, "UTF-8");
                 data += "&" + URLEncoder.encode("location_id", "UTF-8") + "=" +
                         URLEncoder.encode(location_id, "UTF-8");
+                data += "&" + URLEncoder.encode("user_id", "UTF-8") + "=" +
+                        URLEncoder.encode(id, "UTF-8");
 
                 System.out.println(data);
 
@@ -120,6 +125,7 @@ public class QuestionCreateActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Successfully Created Question", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
                 intent.putExtra("LocationID", location_id);
+                intent.putExtra("id", id);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "Error While Creating Question", Toast.LENGTH_LONG).show();

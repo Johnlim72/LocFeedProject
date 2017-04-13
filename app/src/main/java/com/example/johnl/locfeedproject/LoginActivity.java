@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -23,6 +26,8 @@ import java.net.URLEncoder;
 public class LoginActivity extends AppCompatActivity{
 
     private String user_id, password;
+
+    private String id = "0";
 
     private ProgressDialog progressDialog;
 
@@ -88,8 +93,7 @@ public class LoginActivity extends AppCompatActivity{
                 wr.write(data);
                 wr.flush();
 
-                BufferedReader reader = new BufferedReader(new
-                        InputStreamReader(conn.getInputStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
                 StringBuilder sb = new StringBuilder();
                 String line = null;
@@ -101,9 +105,27 @@ public class LoginActivity extends AppCompatActivity{
                     break;
                 }
 
+                String jsonString = sb.toString();
+                String success = "0";
+
+                if(jsonString != null){
+                    try{
+                        JSONObject jsonObject = new JSONObject(jsonString);
+
+                        success = jsonObject.getString("success");
+                        if(success.equals("1")){
+                            id = jsonObject.getString("id");
+                        }
+
+                    } catch (JSONException e){
+                        System.out.println("JSON Error: " + e.getMessage());
+                    }
+                }
+
+
                 System.out.println("sb = " + sb.toString());
 
-                return sb.toString();
+                return success;
 
             } catch (Exception e){
                 return new String("Exception: " + e.getMessage());
@@ -114,16 +136,13 @@ public class LoginActivity extends AppCompatActivity{
         protected void onPostExecute(String s){
             super.onPostExecute(s);
             progressDialog.hide();
-            if(s.equals("Success")){
+            if(s.equals("1")){
                 Toast toast = Toast.makeText(getApplicationContext(), "Successfully Logged In!", Toast.LENGTH_LONG);
                 toast.show();
 
                 Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
-
-            } else if(s.equals("Wrong Password")){
-                Toast toast = Toast.makeText(getApplicationContext(), "You Entered The Wrong Password!", Toast.LENGTH_LONG);
-                toast.show();
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Wrong Credentials!", Toast.LENGTH_LONG);
                 toast.show();

@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 public class ChooseActivity extends AppCompatActivity {
 
-    String location_id;
+    String location_id, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +17,10 @@ public class ChooseActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         location_id = "2";
+        id = "0";
         if(extras != null){
             location_id = extras.getString("LocationID");
+            id = extras.getString("id");
         }
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -39,6 +41,8 @@ public class ChooseActivity extends AppCompatActivity {
     public void onQuestionClick(View view){
         Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
+
         startActivity(intent);
 
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

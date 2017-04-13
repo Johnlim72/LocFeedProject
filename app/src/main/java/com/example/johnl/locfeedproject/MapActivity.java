@@ -41,6 +41,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private UiSettings mUiSettings;
     private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
 
+    private String id;
+
     ArrayList<String> location_names;
     ArrayList<Double> latitudes, longitudes;
     ArrayList<Integer> location_ids;
@@ -48,6 +50,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle extras = getIntent().getExtras();
+        id = "0";
+        if(extras != null){
+            id = extras.getString("id");
+        }
+
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_map);
         // Get the SupportMapFragment and request notification
@@ -99,6 +108,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public boolean onMarkerClick(Marker marker) {
                 Intent bringFeed = new Intent(MapActivity.this, ChooseActivity.class);
                 bringFeed.putExtra("LocationID", mHashMap.get(marker).toString());
+                bringFeed.putExtra("id", id);
                 startActivity(bringFeed);
                 return false;
             }

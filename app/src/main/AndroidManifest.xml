@@ -17,16 +17,15 @@
             android:value="AIzaSyBQRE5Jl_5XOnC6k1T4XrQO4n-iuM68pXU" />
 
         <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MapActivity">
         </activity>
         <activity android:name=".SplashScreen" />
         <activity android:name=".TestActivity" />

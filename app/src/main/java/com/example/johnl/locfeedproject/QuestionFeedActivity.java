@@ -35,7 +35,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
     ListView listView;
     private QuestionAdapter adapter;
 
-    private String location_id;
+    private String location_id, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,11 @@ public class QuestionFeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_feed);
 
         location_id = "2";
+        id = "0";
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             location_id = extras.getString("LocationID");
+            id = extras.getString("id");
         }
 
         listView=(ListView)findViewById(R.id.question_list);
@@ -139,8 +141,9 @@ public class QuestionFeedActivity extends AppCompatActivity {
                                     JSONObject question = questions.getJSONObject(i);
                                     String question_details = question.getString("question_details");
                                     String user_id = question.getString("user_id");
+                                    String user_reputation = question.getString("user_reputation");
 
-                                    questionModels.add(new QuestionModel(question_details, "test_user", "test_rep"));
+                                    questionModels.add(new QuestionModel(question_details, user_id, user_reputation));
                                 }
 
 
@@ -196,6 +199,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
     public void onQuestionCreateClick(View view){
         Intent intent = new Intent(getApplicationContext(), QuestionCreateActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }

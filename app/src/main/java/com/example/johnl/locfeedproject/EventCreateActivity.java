@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class EventCreateActivity extends Activity {
     private Calendar calendar;
 
-    private String location_id;
+    private String location_id, id;
 
     private boolean already_set_start_time, already_set_end_time;
 
@@ -48,9 +48,11 @@ public class EventCreateActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         location_id = "2";
+        id = "0";
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             location_id = extras.getString("LocationID");
+            id = extras.getString("id");
         }
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -175,6 +177,7 @@ public class EventCreateActivity extends Activity {
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 
@@ -205,6 +208,8 @@ public class EventCreateActivity extends Activity {
                         URLEncoder.encode(event_description, "UTF-8");
                 data += "&" + URLEncoder.encode("location_id", "UTF-8") + "=" +
                         URLEncoder.encode(location_id, "UTF-8");
+                data += "&" + URLEncoder.encode("user_id", "UTF-8") + "=" +
+                        URLEncoder.encode(id, "UTF-8");
 
 
                 System.out.println(data);
@@ -248,6 +253,7 @@ public class EventCreateActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Successfully Created Event", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
                 intent.putExtra("LocationID", location_id);
+                intent.putExtra("id", id);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "Error While Creating Event", Toast.LENGTH_LONG).show();
