@@ -38,6 +38,13 @@ public class ChooseActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
     public void onQuestionClick(View view){
         Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
         intent.putExtra("LocationID", location_id);
