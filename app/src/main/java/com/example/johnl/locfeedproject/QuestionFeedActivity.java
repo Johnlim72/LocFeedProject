@@ -1,5 +1,6 @@
 package com.example.johnl.locfeedproject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class QuestionFeedActivity extends AppCompatActivity {
 
     private String location_id, id;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,10 @@ public class QuestionFeedActivity extends AppCompatActivity {
         questionModels = new ArrayList<>();
 
         adapter = new QuestionAdapter(questionModels,getApplicationContext());
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Getting Questions");
+        progressDialog.show();
 
         new GetQuestions().execute();
 
@@ -182,6 +189,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
         protected void onPostExecute(Void result){
             super.onPostExecute(result);
             listView.setAdapter(adapter);
+            progressDialog.hide();
         }
     }
 

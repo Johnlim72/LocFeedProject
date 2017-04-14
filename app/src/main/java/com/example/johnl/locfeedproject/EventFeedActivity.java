@@ -1,6 +1,7 @@
 package com.example.johnl.locfeedproject;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ public class EventFeedActivity extends AppCompatActivity {
     private ListView listView;
     private EventAdapter adapter;
 
+    ProgressDialog progressDialog;
+
     private String location_id, id;
 
     @Override
@@ -57,6 +60,10 @@ public class EventFeedActivity extends AppCompatActivity {
         eventModels = new ArrayList<>();
 
         adapter = new EventAdapter(eventModels, getApplicationContext());
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Getting Events");
+        progressDialog.show();
 
         new GetEvents().execute();
     }
@@ -185,6 +192,7 @@ public class EventFeedActivity extends AppCompatActivity {
         protected void onPostExecute(Void result){
             super.onPostExecute(result);
             listView.setAdapter(adapter);
+            progressDialog.hide();
         }
 
     }
