@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:orientation="vertical"
     android:padding="10dp"
     android:background="#ffecb3">
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="How much could a wood chuck chuck if a wood chuck could chuck wood?"
-        android:textColor="#ec7063"
+        android:textColor="#2874a6"
         style="@style/text2"
         />
 
@@ -20,29 +20,37 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:layout_below="@id/question" >
+        android:layout_alignParentBottom="true">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="by: "
-            android:textColor="@android:color/black"/>
+            android:text="By: "
+            android:textColor="#2874a6"
+            style="@style/text2"/>
         <TextView
             android:id="@+id/user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monil, "
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:text="Monil"
+            style="@style/text2"
+            android:textColor="@android:color/black" />
 
+        <TextView
+            android:id="@+id/comma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=", "
+            style="@style/text2"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/userRep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 4.3"
-            android:textAppearance="?android:attr/textAppearanceButton"
+            android:text="4.3"
+            style="@style/text2"
             android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            />
 
     </LinearLayout>
 

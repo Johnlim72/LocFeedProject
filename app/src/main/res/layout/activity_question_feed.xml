@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="#ffecd5">
+    android:background="#ec7063">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#aed6f1">
+        android:background="#2874a6">
 
         <Button
             android:id="@+id/question_create_btn"

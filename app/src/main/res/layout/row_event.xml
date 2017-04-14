@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
-        android:layout_marginTop="2dp"
         android:text="TUDev Meeting, bring your laptops, pizza, meet friends and code as you wish!"
         style="@style/text2" />
 
