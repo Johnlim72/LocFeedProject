@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="150dp"
     android:orientation="vertical"
     android:padding="10dp"
     android:background="#ffecb3"
@@ -25,77 +25,133 @@
         android:text="TUDev Meeting, bring your laptops, pizza, meet friends and code as you wish!"
         style="@style/text2" />
 
-    <TextView
-        android:id="@+id/date"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="March 2"
-        style="@style/text2"
-        android:layout_marginTop="2dp"
-        android:layout_alignParentBottom="true"
-        android:textColor="#17202a"
-         />
+        android:layout_marginBottom="20dp">
 
-    <TextView
-        android:id="@+id/timeStart"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/when_date"
+            android:text="DATE: "
+            style="@style/text2"
+            android:textColor="#ec7063"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="March 2"
+            style="@style/text2"
+            android:layout_toRightOf="@id/when_date"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="#17202a"
+            />
+
+        <TextView
+            android:id="@+id/when_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIME: "
+            style="@style/text2"
+            android:layout_toRightOf="@id/date"
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#ec7063"
+            />
+
+        <TextView
+            android:id="@+id/timeStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5:00"
+            style="@style/text2"
+            android:layout_toRightOf="@id/when_time"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#17202a"/>
+
+        <TextView
+            android:id="@+id/dash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:layout_toRightOf="@id/timeStart"
+            android:layout_alignParentBottom="true"
+            style="@style/text2"
+            android:textColor="#17202a"
+            />
+
+        <TextView
+            android:id="@+id/timeEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7:00"
+            style="@style/text2"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/dash"
+            android:layout_alignParentBottom="true"
+            android:textColor="#17202a"/>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5:00 -"
-        style="@style/text2"
-        android:layout_toRightOf="@id/date"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
-        android:textColor="#17202a"/>
+        android:layout_alignParentLeft="true">
 
-    <TextView
-        android:id="@+id/timeEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="7:00"
-        style="@style/text2"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@id/timeStart"
-        android:layout_marginLeft="5dp"
-        android:layout_alignParentBottom="true"
-        android:textColor="#17202a"/>
+        <TextView
+            android:id="@+id/by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By: "
+            style="@style/text2"
+            android:textColor="#ec7063"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentBottom="true" />
 
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monil"
+            style="@style/text2"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/by"
+            android:textColor="#17202a"
+            />
 
-    <TextView
-        android:id="@+id/userRep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  4.3"
-        style="@style/text2"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="2dp"
-        android:layout_alignParentRight="true"
-        android:textColor="#17202a"/>
+        <TextView
+            android:id="@+id/comma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=", "
+            android:layout_toRightOf="@id/user"
+            style="@style/text2"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#17202a"/>
 
-    <TextView
-        android:id="@+id/user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monil,"
-        style="@style/text2"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="2dp"
-        android:layout_toLeftOf="@id/userRep"
-        android:textColor="#17202a"
-        />
+        <TextView
+            android:id="@+id/userRep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.3"
+            style="@style/text2"
+            android:layout_toRightOf="@id/comma"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#17202a"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="by: "
-        style="@style/text2"
-        android:layout_toLeftOf="@id/user"
-        android:layout_marginTop="2dp"
-        android:layout_alignParentBottom="true"
-        android:textColor="#17202a"/>
-
-
-
-
+    </RelativeLayout>
 
 </RelativeLayout>

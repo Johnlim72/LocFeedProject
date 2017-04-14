@@ -94,10 +94,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         for(int i = 0; i < location_names.size(); i++){
             LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
             Marker marker = googleMap.addMarker(new MarkerOptions().position(newLocation).title(location_names.get(i)));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
+
             mHashMap.put(marker, location_ids.get(i));
         }
 
+        LatLng middle = new LatLng(39.981469143334614,-75.15679478645325);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(middle, 15));
         mUiSettings = googleMap.getUiSettings();
         mUiSettings.setZoomControlsEnabled(true);
         mUiSettings.setZoomGesturesEnabled(true);
