@@ -32,6 +32,7 @@ public class ChooseActivity extends AppCompatActivity {
     public void onEventClick(View view){
         Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
 
         startActivity(intent);
 
@@ -58,7 +59,7 @@ public class ChooseActivity extends AppCompatActivity {
 
     public void onChooseLocationClick(View view){
         Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-        intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
 
         startActivity(intent);
 

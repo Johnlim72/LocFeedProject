@@ -194,7 +194,15 @@ public class EventCreateActivity extends Activity {
 
         @Override
         protected String doInBackground(String... args){
-            try{
+            try {
+                System.out.println("Before data");
+                System.out.println("event_header: " + event_header);
+                System.out.println("start_time: " + start_time);
+                System.out.println("end_time: " + end_time);
+                System.out.println("event_date: " + event_date);
+                System.out.println("event_description: " + event_description);
+                System.out.println("location_id: " + location_id);
+                System.out.println("id: " + id);
                 String link = "https://locfeed.000webhostapp.com/android_connect/create_event.php";
                 String data = URLEncoder.encode("event_header", "UTF-8") + "=" +
                         URLEncoder.encode(event_header, "UTF-8");
@@ -223,13 +231,10 @@ public class EventCreateActivity extends Activity {
                 wr.write(data);
                 wr.flush();
 
-                BufferedReader reader = new BufferedReader(new
-                        InputStreamReader(conn.getInputStream()));
-
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
-                String line = null;
 
-                // Read Server Response
+                String line = "";
                 while ((line = reader.readLine()) != null) {
                     System.out.println("Line: " + line);
                     sb.append(line);

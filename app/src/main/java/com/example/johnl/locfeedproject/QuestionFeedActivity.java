@@ -135,17 +135,27 @@ public class QuestionFeedActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(jsonString);
 
-                                JSONArray questions = jsonObject.getJSONArray("questions");
+                                String success = jsonObject.getString("success");
 
-                                for (int i = 0; i < questions.length(); i++) {
-                                    JSONObject question = questions.getJSONObject(i);
-                                    String question_details = question.getString("question_details");
-                                    String user_id = question.getString("user_id");
-                                    String user_reputation = question.getString("user_reputation");
+                                if(success.equals("1")){
+                                    JSONArray questions = jsonObject.getJSONArray("questions");
 
-                                    questionModels.add(new QuestionModel(question_details, user_id, user_reputation));
+                                    for (int i = 0; i < questions.length(); i++) {
+                                        JSONObject question = questions.getJSONObject(i);
+                                        String question_details = question.getString("question_details");
+                                        String user_id = question.getString("user_id");
+                                        String user_reputation = question.getString("user_reputation");
+
+                                        questionModels.add(new QuestionModel(question_details, user_id, user_reputation));
+                                    }
+                                } else{
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(), "No Questions", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
                                 }
-
 
                             } catch (final JSONException e) {
                                 Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());

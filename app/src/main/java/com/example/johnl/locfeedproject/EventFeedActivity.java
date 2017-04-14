@@ -129,25 +129,36 @@ public class EventFeedActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(jsonString);
 
-                                JSONArray events = jsonObject.getJSONArray("events");
+                                String success = jsonObject.getString("success");
 
-                                for (int i = 0; i < events.length(); i++) {
-                                    JSONObject event = events.getJSONObject(i);
-                                    String event_header = event.getString("event_header");
-                                    String event_description = event.getString("event_description");
-                                    String event_date = event.get("event_date").toString();
-                                    String start_time = event.get("start_time").toString();
-                                    start_time = start_time.substring(0, 5);
-                                    String end_time = event.get("end_time").toString();
-                                    end_time = end_time.substring(0, 5);
-                                    String user_id = event.getString("user_id");
-                                    String user_reputation = event.getString("user_reputation");
+                                if(success.equals("1")){
+                                    JSONArray events = jsonObject.getJSONArray("events");
 
-                                    System.out.println("Event Header = " + event_header);
+                                    for (int i = 0; i < events.length(); i++) {
+                                        JSONObject event = events.getJSONObject(i);
+                                        String event_header = event.getString("event_header");
+                                        String event_description = event.getString("event_description");
+                                        String event_date = event.get("event_date").toString();
+                                        String start_time = event.get("start_time").toString();
+                                        start_time = start_time.substring(0, 5);
+                                        String end_time = event.get("end_time").toString();
+                                        end_time = end_time.substring(0, 5);
+                                        String user_id = event.getString("user_id");
+                                        String user_reputation = event.getString("user_reputation");
 
-                                    eventModels.add(new EventModel(event_header, event_description, user_id, user_reputation, start_time, end_time, event_date));
+                                        System.out.println("Event Header = " + event_header);
+
+                                        eventModels.add(new EventModel(event_header, event_description, user_id, user_reputation, start_time, end_time, event_date));
+                                    }
+                                } else {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(), "No Events", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
                                 }
-
 
                             } catch (final JSONException e) {
                                 Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
