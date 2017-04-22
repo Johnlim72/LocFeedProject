@@ -28,29 +28,27 @@ import java.util.Calendar;
  * Created by Monil on 4/1/17.
  */
 
+//Activity for creating an event at a location.
 public class EventCreateActivity extends Activity {
     private Calendar calendar;
-
     private String location_id, id;
-
     private boolean already_set_start_time, already_set_end_time;
-
     int year, month, day, startHour, startMinute, endHour, endMinute;
 
     String event_date, start_time, end_time;
-
     String event_header, event_description;
 
     ProgressDialog progressDialog;
 
+    //sets the view on the screen for the "activity_choose" layout
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         location_id = "2";
         id = "0";
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
+        if (extras != null) {
             location_id = extras.getString("LocationID");
             id = extras.getString("id");
         }
@@ -73,11 +71,11 @@ public class EventCreateActivity extends Activity {
     }
 
     @SuppressWarnings("deprecation")
-        public void setEndTime(View view) {
-            showDialog(3);
-        }
+    public void setEndTime(View view) {
+        showDialog(3);
+    }
 
-    protected Dialog onCreateDialog(int id){
+    protected Dialog onCreateDialog(int id) {
         calendar = Calendar.getInstance();
         if (id == 1) {
             year = calendar.get(Calendar.YEAR);
@@ -89,7 +87,7 @@ public class EventCreateActivity extends Activity {
             datePickerDialog.setTitle("Event Date");
 
             return datePickerDialog;
-        } else if(id == 2){
+        } else if (id == 2) {
             startHour = calendar.get(Calendar.HOUR);
             startMinute = calendar.get(Calendar.MINUTE);
 
@@ -98,7 +96,7 @@ public class EventCreateActivity extends Activity {
             timePickerDialog.setTitle("Event Start Time");
 
             return timePickerDialog;
-        } else if(id == 3){
+        } else if (id == 3) {
             endHour = calendar.get(Calendar.HOUR);
             endMinute = calendar.get(Calendar.MINUTE);
 
@@ -117,21 +115,21 @@ public class EventCreateActivity extends Activity {
             event_date = year + "-" + month + "-" + day;
             System.out.println(event_date);
 
-            if(already_set_start_time == false){
+            if (already_set_start_time == false) {
                 showDialog(2);
             }
         }
     };
 
-    private TimePickerDialog.OnTimeSetListener myStartTimeListener = new TimePickerDialog.OnTimeSetListener(){
+    private TimePickerDialog.OnTimeSetListener myStartTimeListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
-        public void onTimeSet(TimePicker timePicker, int hour, int minute){
+        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
             String minute_string = "" + minute + "";
             String hour_string = "" + hour + "";
-            if(minute < 10){
+            if (minute < 10) {
                 minute_string = "0" + minute + "";
             }
-            if(hour < 10){
+            if (hour < 10) {
                 hour_string = "0" + hour + "";
             }
             start_time = hour_string + ":" + minute_string + ":00";
@@ -139,7 +137,7 @@ public class EventCreateActivity extends Activity {
 
             already_set_start_time = true;
 
-            if(already_set_end_time == false){
+            if (already_set_end_time == false) {
                 showDialog(3);
             }
         }
@@ -150,10 +148,10 @@ public class EventCreateActivity extends Activity {
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
             String minute_string = "" + minute + "";
             String hour_string = "" + hour + "";
-            if(minute < 10){
+            if (minute < 10) {
                 minute_string = "0" + minute + "";
             }
-            if(hour < 10){
+            if (hour < 10) {
                 hour_string = "0" + hour + "";
             }
             end_time = hour_string + ":" + minute_string + ":00";
@@ -163,7 +161,7 @@ public class EventCreateActivity extends Activity {
         }
     };
 
-    public void createEvent(View view){
+    public void createEvent(View view) {
         EditText event_header_ET = (EditText) findViewById(R.id.event_header);
         EditText event_description_ET = (EditText) findViewById(R.id.event_description);
 
@@ -174,16 +172,16 @@ public class EventCreateActivity extends Activity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
         intent.putExtra("LocationID", location_id);
         intent.putExtra("id", id);
         startActivity(intent);
     }
 
-    private class CreateNewEvent extends AsyncTask<String, String, String>{
+    private class CreateNewEvent extends AsyncTask<String, String, String> {
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(EventCreateActivity.this);
             progressDialog.setMessage("Creating Event");
@@ -193,7 +191,7 @@ public class EventCreateActivity extends Activity {
         }
 
         @Override
-        protected String doInBackground(String... args){
+        protected String doInBackground(String... args) {
             try {
                 System.out.println("Before data");
                 System.out.println("event_header: " + event_header);
@@ -244,17 +242,17 @@ public class EventCreateActivity extends Activity {
                 System.out.println("sb = " + sb.toString());
 
                 return sb.toString();
-            } catch (Exception e){
+            } catch (Exception e) {
                 return new String("Exception: " + e.getMessage());
             }
         }
 
         @Override
-        protected void onPostExecute(String s){
+        protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressDialog.hide();
             System.out.println("onPost s:" + s);
-            if(s.equals("Success!")){
+            if (s.equals("Success!")) {
                 Toast.makeText(getApplicationContext(), "Successfully Created Event", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
                 intent.putExtra("LocationID", location_id);

@@ -1,28 +1,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:orientation="vertical"
-    android:padding="10dp"
     android:background="#ffecb3"
-    >
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/name"
+        style="@style/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="TUDev Meeting Event Join Now!"
-        android:textSize="20dp"
         android:textColor="#ec7063"
-        style="@style/text2"/>
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/description"
+        style="@style/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:text="TUDev Meeting, bring your laptops, pizza, meet friends and code as you wish!"
-        style="@style/text2" />
+        android:textColor="#000000" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -30,72 +30,68 @@
         android:layout_marginBottom="20dp">
 
         <TextView
+            android:id="@+id/when_date"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/when_date"
+            android:layout_alignParentBottom="true"
             android:text="DATE: "
-            style="@style/text2"
-            android:textColor="#ec7063"
-            android:layout_alignParentBottom="true" />
+            android:textColor="#ec7063" />
 
         <TextView
             android:id="@+id/date"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="March 2"
-            style="@style/text2"
-            android:layout_toRightOf="@id/when_date"
-            android:layout_marginTop="2dp"
             android:layout_alignParentBottom="true"
-            android:textColor="#17202a"
-            />
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/when_date"
+            android:text="March 2"
+            android:textColor="#17202a" />
 
         <TextView
             android:id="@+id/when_time"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TIME: "
-            style="@style/text2"
-            android:layout_toRightOf="@id/date"
-            android:layout_marginLeft="8dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="2dp"
-            android:textColor="#ec7063"
-            />
+            android:layout_toRightOf="@id/date"
+            android:text="TIME: "
+            android:textColor="#ec7063" />
 
         <TextView
             android:id="@+id/timeStart"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5:00"
-            style="@style/text2"
-            android:layout_toRightOf="@id/when_time"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
-            android:textColor="#17202a"/>
+            android:layout_toRightOf="@id/when_time"
+            android:text="5:00"
+            android:textColor="#17202a" />
 
         <TextView
             android:id="@+id/dash"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" - "
-            android:layout_toRightOf="@id/timeStart"
             android:layout_alignParentBottom="true"
-            style="@style/text2"
-            android:textColor="#17202a"
-            />
+            android:layout_toRightOf="@id/timeStart"
+            android:text=" - "
+            android:textColor="#17202a" />
 
         <TextView
             android:id="@+id/timeEnd"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7:00"
-            style="@style/text2"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/dash"
-            android:layout_alignParentBottom="true"
-            android:textColor="#17202a"/>
-
+            android:text="7:00"
+            android:textColor="#17202a" />
 
 
     </RelativeLayout>
@@ -108,49 +104,64 @@
 
         <TextView
             android:id="@+id/by"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="By: "
-            style="@style/text2"
-            android:textColor="#ec7063"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
-            android:layout_alignParentBottom="true" />
+            android:text="By: "
+            android:textColor="#ec7063" />
 
         <TextView
             android:id="@+id/user"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monil"
-            style="@style/text2"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/by"
-            android:textColor="#17202a"
-            />
+            android:text="Monil"
+            android:textColor="#17202a" />
 
         <TextView
             android:id="@+id/comma"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=", "
-            android:layout_toRightOf="@id/user"
-            style="@style/text2"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
-            android:textColor="#17202a"/>
+            android:layout_toRightOf="@id/user"
+            android:text=", "
+            android:textColor="#17202a" />
 
         <TextView
             android:id="@+id/userRep"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4.3"
-            style="@style/text2"
-            android:layout_toRightOf="@id/comma"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
-            android:textColor="#17202a"
+            android:layout_toRightOf="@id/comma"
+            android:text="4.3"
+            android:textColor="#17202a" />
+
+        <Button
+            android:id="@+id/commentslogo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/comments_logo"
             />
 
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/pencil_logo"
+            android:layout_toLeftOf="@id/commentslogo"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="12dp"
+            />
     </RelativeLayout>
 
 </RelativeLayout>

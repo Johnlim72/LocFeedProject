@@ -8,16 +8,30 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#2874a6">
 
-        <Button
-            android:id="@+id/create_event_btn"
-            android:text="Create Event"
-            android:layout_width="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:background="#ec7063"
-            style="@style/button1"
-            android:onClick="onCreateEventClick"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/create_event_btn"
+                android:text="Create Event"
+                android:layout_width="190dp"
+                style="@style/button1"
+                android:onClick="onCreateEventClick"/>
+
+            <Button
+                android:id="@+id/refresh_event_btn"
+                android:text="Refresh Feed"
+                android:layout_width="190dp"
+                style="@style/button3"
+                android:layout_toRightOf="@id/create_event_btn"
+                android:onClick="OnRefresh"/>
+
+
+        </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
 

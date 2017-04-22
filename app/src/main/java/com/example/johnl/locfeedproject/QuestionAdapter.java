@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class QuestionAdapter extends ArrayAdapter<QuestionModel> implements View.OnClickListener{
+public class QuestionAdapter extends ArrayAdapter<QuestionModel> {
 
     private ArrayList<QuestionModel> dataSet;
     Context mContext;
@@ -32,22 +32,6 @@ public class QuestionAdapter extends ArrayAdapter<QuestionModel> implements View
         super(context, R.layout.row_question, data);
         this.dataSet = data;
         this.mContext=context;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        int position=(Integer) v.getTag();
-        Object object= getItem(position);
-        QuestionModel questionModel =(QuestionModel)object;
-
-        switch (v.getId())
-        {
-            case R.id.question:
-                Snackbar.make(v, "question:" + questionModel.getQuestion(), Snackbar.LENGTH_LONG)
-                        .setAction("No action", null).show();
-                break;
-        }
     }
 
     private int lastPosition = -1;
@@ -82,7 +66,6 @@ public class QuestionAdapter extends ArrayAdapter<QuestionModel> implements View
         viewHolder.question.setText(questionModel.getQuestion());
         viewHolder.user.setText(questionModel.getUser());
         viewHolder.userRep.setText("  " + questionModel.getUserRep());
-        viewHolder.question.setOnClickListener(this);
         viewHolder.question.setTag(position);
         // Return the completed view to render on screen
         return convertView;

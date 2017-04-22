@@ -1,57 +1,72 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:background="#ffecb3"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:background="#ffecb3">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/question"
+        style="@style/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="How much could a wood chuck chuck if a wood chuck could chuck wood?"
-        android:textColor="#2874a6"
-        style="@style/text2"
-        />
+        android:textColor="#2874a6" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal">
+
         <TextView
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="By: "
-            android:textColor="#2874a6"
-            style="@style/text2"/>
+            android:textColor="#2874a6" />
+
         <TextView
             android:id="@+id/user"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Monil"
-            style="@style/text2"
             android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/comma"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=", "
-            style="@style/text2"
             android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/userRep"
+            style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4.3"
-            style="@style/text2"
-            android:textColor="@android:color/black"
-            />
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/commentslogo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/comments_logo" />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="12dp"
+        android:layout_toLeftOf="@id/commentslogo"
+        android:background="@drawable/pencil_logo" />
 </RelativeLayout>

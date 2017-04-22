@@ -142,8 +142,6 @@ public class SignUpActivity extends AppCompatActivity{
             } else {
                 Toast.makeText(SignUpActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
             }
-
-
         }
     }
 }

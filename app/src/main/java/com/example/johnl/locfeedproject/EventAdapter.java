@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class EventAdapter extends ArrayAdapter<EventModel> implements View.OnClickListener{
+public class EventAdapter extends ArrayAdapter<EventModel> {
 
     private ArrayList<EventModel> dataSet;
     Context mContext;
@@ -31,26 +31,11 @@ public class EventAdapter extends ArrayAdapter<EventModel> implements View.OnCli
         TextView date;
     }
 
+    //EventAdapter constructor
     public EventAdapter(ArrayList<EventModel> data, Context context) {
         super(context, R.layout.row_event, data);
         this.dataSet = data;
         this.mContext=context;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        int position=(Integer) v.getTag();
-        Object object= getItem(position);
-        EventModel eventModel =(EventModel)object;
-
-        switch (v.getId())
-        {
-            case R.id.description:
-                Snackbar.make(v, "Description: " + eventModel.getDescription(), Snackbar.LENGTH_LONG)
-                        .setAction("No action", null).show();
-                break;
-        }
     }
 
     private int lastPosition = -1;
@@ -93,7 +78,6 @@ public class EventAdapter extends ArrayAdapter<EventModel> implements View.OnCli
         viewHolder.timeStart.setText(eventModel.getTimeStart());
         viewHolder.timeEnd.setText(eventModel.getTimeEnd());
         viewHolder.date.setText(eventModel.getDate());
-        viewHolder.description.setOnClickListener(this);
         viewHolder.description.setTag(position);
         // Return the completed view to render on screen
         return convertView;
