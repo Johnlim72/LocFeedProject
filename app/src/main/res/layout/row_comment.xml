@@ -44,13 +44,34 @@
             android:text=", "
             android:textColor="@android:color/black" />
 
+        <Button
+            android:id="@+id/decrement"
+            style="@style/button1"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:text="-"
+            android:layout_toRightOf="@id/comma"
+            android:layout_alignParentBottom="true"/>
+
+
         <TextView
             android:id="@+id/userRep"
             style="@style/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="4.3"
             android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/increment"
+            style="@style/button1"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:text="+"
+            android:layout_toRightOf="@id/userRep"
+            android:layout_alignParentBottom="true"/>
 
     </LinearLayout>
 
@@ -69,4 +90,6 @@
         android:layout_marginRight="12dp"
         android:layout_toLeftOf="@id/commentslogo"
         android:background="@drawable/pencil_logo" />
+
+
 </RelativeLayout>
