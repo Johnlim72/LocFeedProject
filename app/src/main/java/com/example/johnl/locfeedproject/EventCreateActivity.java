@@ -45,13 +45,17 @@ public class EventCreateActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        location_id = "2";
-        id = "0";
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             location_id = extras.getString("LocationID");
             id = extras.getString("id");
+        } else {
+            location_id = "2";
+            id = "0";
         }
+
+        System.out.println("+__+_+_+++___ ID in CreateEventActivity: " + id);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

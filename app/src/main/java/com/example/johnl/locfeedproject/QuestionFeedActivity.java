@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -44,13 +42,16 @@ public class QuestionFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_feed);
 
-        location_id = "2";
-        id = "0";
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            location_id = extras.getString("LocationID");
-            id = extras.getString("id");
+            location_id = extras.getString("LocationID").toString();
+            id = extras.getString("id").toString();
+        } else {
+            location_id = "2";
+            id = "0";
         }
+
+        System.out.println("!_!_@_@_$_@_!@ ID in QuestionFeed: " + id);
 
         listView=(ListView)findViewById(R.id.question_list);
 
@@ -80,6 +81,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 

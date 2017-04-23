@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 public class ChooseActivity extends AppCompatActivity {
 
-    String location_id, id;
+    private String location_id, id;
 
     //sets the view on the screen for the "activity_choose" layout
     @Override
@@ -17,12 +17,15 @@ public class ChooseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Bundle extras = getIntent().getExtras();
-        location_id = "2";
-        id = "0";
         if (extras != null) {
-            location_id = extras.getString("LocationID");
-            id = extras.getString("id");
+            location_id = extras.getString("LocationID").toString();
+            id = extras.getString("id").toString();
+        } else {
+            location_id = "2";
+            id = "0";
         }
+
+        System.out.println("++====++++++++ ID in ChooseActivity: " + id);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

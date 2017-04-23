@@ -54,8 +54,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Bundle extras = getIntent().getExtras();
         id = "0";
         if(extras != null){
-            id = extras.getString("id");
+            id = extras.getString("id").toString();
         }
+
+        System.out.println("++++++======= ID in Map: " + id);
 
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_map);

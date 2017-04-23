@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -46,13 +44,13 @@ public class EventFeedActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        location_id = "2";
-        id = "0";
-
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            location_id = extras.getString("LocationID");
-            id = extras.getString("id");
+            location_id = extras.getString("LocationID").toString();
+            id = extras.getString("id").toString();
+        } else {
+            location_id = "2";
+            id = "0";
         }
 
         listView = (ListView)findViewById(R.id.event_list);
