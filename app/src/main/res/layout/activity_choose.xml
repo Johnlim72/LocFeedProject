@@ -23,20 +23,20 @@
             />
 
         <Button
-            android:id="@+id/questionButton"
-            android:text="Questions"
+            android:id="@+id/commentButton"
+            android:text="Comments"
             android:layout_below="@id/eventButton"
             style="@style/button2"
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
-            android:onClick="onQuestionClick"
+            android:onClick="onCommentClick"
             />
 
         <Button
             android:id="@+id/backButton"
             android:text="choose location"
             style="@style/button3"
-            android:layout_below="@id/questionButton"
+            android:layout_below="@id/commentButton"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"
             android:onClick="onChooseLocationClick"

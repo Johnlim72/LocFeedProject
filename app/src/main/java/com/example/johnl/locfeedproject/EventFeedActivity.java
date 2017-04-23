@@ -70,6 +70,7 @@ public class EventFeedActivity extends AppCompatActivity {
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
         intent.putExtra("LocationID", location_id);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 

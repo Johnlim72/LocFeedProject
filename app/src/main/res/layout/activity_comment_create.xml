@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Question"
+            android:text="Comment"
             android:layout_gravity="center_horizontal"
             style="@style/text1"
             android:textColor="#FFFFFF"
@@ -23,7 +23,7 @@
             />
 
         <EditText
-            android:id="@+id/question_details"
+            android:id="@+id/comment_details"
             style="@style/editTextStyle2" />
 
         <Button
@@ -39,6 +39,6 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Create"
             android:background="@drawable/button_style"
-            android:onClick="createQuestion"/>
+            android:onClick="createComment"/>
     </LinearLayout>
 </RelativeLayout>

@@ -27,11 +27,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class QuestionFeedActivity extends AppCompatActivity {
+public class CommentFeedActivity extends AppCompatActivity {
 
-    ArrayList<QuestionModel> questionModels;
+    ArrayList<CommentModel> commentModels;
     ListView listView;
-    private QuestionAdapter adapter;
+    private CommentAdapter adapter;
 
     private String location_id, id;
 
@@ -40,7 +40,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question_feed);
+        setContentView(R.layout.activity_comment_feed);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
@@ -51,27 +51,27 @@ public class QuestionFeedActivity extends AppCompatActivity {
             id = "0";
         }
 
-        System.out.println("!_!_@_@_$_@_!@ ID in QuestionFeed: " + id);
+        System.out.println("!_!_@_@_$_@_!@ ID in CommentFeed: " + id);
 
-        listView=(ListView)findViewById(R.id.question_list);
+        listView=(ListView)findViewById(R.id.comment_list);
 
-        questionModels = new ArrayList<>();
+        commentModels = new ArrayList<>();
 
-        adapter = new QuestionAdapter(questionModels,getApplicationContext());
+        adapter = new CommentAdapter(commentModels,getApplicationContext());
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Getting Questions");
+        progressDialog.setMessage("Getting Comments");
         progressDialog.show();
 
-        new GetQuestions().execute();
+        new GetComments().execute();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                QuestionModel questionModel = questionModels.get(position);
+                CommentModel commentModel = commentModels.get(position);
 
-                Snackbar.make(view, questionModel.getQuestion()+"\n"+" User: "+ questionModel.getUser(), Snackbar.LENGTH_LONG)
+                Snackbar.make(view, commentModel.getComment()+"\n"+" User: "+ commentModel.getUser(), Snackbar.LENGTH_LONG)
                         .setAction("No action", null).show();
             }
         });
@@ -86,14 +86,14 @@ public class QuestionFeedActivity extends AppCompatActivity {
     }
 
     public void OnRefresh(View view) {
-        Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CommentFeedActivity.class);
         intent.putExtra("LocationID", location_id);
         intent.putExtra("id", id);
 
         startActivity(intent);
     }
 
-    private class GetQuestions extends AsyncTask<Void, Void, Void>{
+    private class GetComments extends AsyncTask<Void, Void, Void>{
 
         @Override
         protected void onPreExecute(){
@@ -103,7 +103,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0){
             try{
-                String link = "https://locfeed.000webhostapp.com/android_connect/get_questions.php";
+                String link = "https://locfeed.000webhostapp.com/android_connect/get_comments.php";
                 URL url = new URL(link);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true);
@@ -146,7 +146,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
                     System.out.println("Before jsonString != null");
                     if(jsonString != null){
                         if(jsonString.equals("No results")){
-                            Toast.makeText(getApplicationContext(), "No Questions!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "No Comments!", Toast.LENGTH_LONG).show();
                         } else {
                             try {
                                 JSONObject jsonObject = new JSONObject(jsonString);
@@ -154,21 +154,21 @@ public class QuestionFeedActivity extends AppCompatActivity {
                                 String success = jsonObject.getString("success");
 
                                 if(success.equals("1")){
-                                    JSONArray questions = jsonObject.getJSONArray("questions");
+                                    JSONArray comments = jsonObject.getJSONArray("comments");
 
-                                    for (int i = 0; i < questions.length(); i++) {
-                                        JSONObject question = questions.getJSONObject(i);
-                                        String question_details = question.getString("question_details");
-                                        String user_id = question.getString("user_id");
-                                        String user_reputation = question.getString("user_reputation");
+                                    for (int i = 0; i < comments.length(); i++) {
+                                        JSONObject comment = comments.getJSONObject(i);
+                                        String comment_details = comment.getString("comment_details");
+                                        String user_id = comment.getString("user_id");
+                                        String user_reputation = comment.getString("user_reputation");
 
-                                        questionModels.add(new QuestionModel(question_details, user_id, user_reputation));
+                                        commentModels.add(new CommentModel(comment_details, user_id, user_reputation));
                                     }
                                 } else{
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(), "No Questions", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "No Comments", Toast.LENGTH_LONG).show();
                                         }
                                     });
                                 }
@@ -179,7 +179,7 @@ public class QuestionFeedActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         Toast.makeText(getApplicationContext(),
-                                                "No Questions!",
+                                                "No Comments!",
                                                 Toast.LENGTH_LONG).show();
                                     }
                                 });
@@ -202,8 +202,8 @@ public class QuestionFeedActivity extends AppCompatActivity {
         }
     }
 
-    public void onQuestionCreateClick(View view){
-        Intent intent = new Intent(getApplicationContext(), QuestionCreateActivity.class);
+    public void onCommentCreateClick(View view){
+        Intent intent = new Intent(getApplicationContext(), CommentCreateActivity.class);
         intent.putExtra("LocationID", location_id);
         intent.putExtra("id", id);
         startActivity(intent);

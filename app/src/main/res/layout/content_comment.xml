@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.journaldev.customlistview.QuestionFeedActivity"
+    tools:context="com.journaldev.customlistview.CommentFeedActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_question_feed">
+    tools:showIn="@layout/activity_comment_feed">
 
 
     <ListView
-        android:id="@+id/question_list"
+        android:id="@+id/comment_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:divider="@android:color/transparent"

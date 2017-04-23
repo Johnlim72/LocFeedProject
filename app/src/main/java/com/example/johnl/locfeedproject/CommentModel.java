@@ -5,20 +5,20 @@ package com.example.johnl.locfeedproject;
  */
 
 
-public class QuestionModel {
+public class CommentModel {
 
-    String question;
+    String comment;
     String user;
     String userRep;
 
-    public QuestionModel(String question, String user, String userRep ) {
-        this.question=question;
+    public CommentModel(String comment, String user, String userRep ) {
+        this.comment=comment;
         this.user=user;
         this.userRep=userRep;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getComment() {
+        return comment;
     }
 
     public String getUser() {

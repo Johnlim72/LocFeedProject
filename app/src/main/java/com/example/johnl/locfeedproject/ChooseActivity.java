@@ -51,9 +51,9 @@ public class ChooseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Go to QuestionFeedActivity when user clicks on 'QUESTIONS' button on screen
-    public void onQuestionClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
+    //Go to CommentFeedActivity when user clicks on 'COMMENTS' button on screen
+    public void onCommentClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), CommentFeedActivity.class);
         intent.putExtra("LocationID", location_id);
         intent.putExtra("id", id);
 

@@ -7,13 +7,14 @@
     tools:context="com.example.johnl.locfeedproject.MainActivity">
 
     <Button
+        android:id="@+id/goToButton"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         style="@style/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Add Place" />
+        android:text="Go to" />
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,7 +25,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         tools:context="com.example.mapwithmarker.MapsMarkerActivity"
-
         />
 
     <ImageView

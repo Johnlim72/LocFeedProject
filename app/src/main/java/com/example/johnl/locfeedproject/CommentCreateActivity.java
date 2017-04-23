@@ -22,9 +22,9 @@ import java.net.URLEncoder;
  * Created by Monil on 4/1/17.
  */
 
-public class QuestionCreateActivity extends Activity {
+public class CommentCreateActivity extends Activity {
 
-    String question_details;
+    String comment_details;
     ProgressDialog progressDialog;
 
     private String location_id, id;
@@ -32,7 +32,6 @@ public class QuestionCreateActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
@@ -43,36 +42,36 @@ public class QuestionCreateActivity extends Activity {
             id = "0";
         }
 
-        System.out.println("++____++++____ ID in QuestionCreate: " + id);
+        System.out.println("++____++++____ ID in CommentCreate: " + id);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_question_create);
+        setContentView(R.layout.activity_comment_create);
     }
 
-    public void createQuestion(View view){
-        EditText question_details_ET = (EditText) findViewById(R.id.question_details);
+    public void createComment(View view){
+        EditText comment_details_ET = (EditText) findViewById(R.id.comment_details);
 
-        question_details = question_details_ET.getText().toString();
+        comment_details = comment_details_ET.getText().toString();
 
-        new CreateNewQuestion().execute(question_details);
+        new CreateNewComment().execute(comment_details);
     }
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CommentFeedActivity.class);
         intent.putExtra("LocationID", location_id);
         intent.putExtra("id", id);
         startActivity(intent);
     }
 
-    class CreateNewQuestion extends AsyncTask<String, String, String>{
+    class CreateNewComment extends AsyncTask<String, String, String>{
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            progressDialog = new ProgressDialog(QuestionCreateActivity.this);
-            progressDialog.setMessage("Creating Question");
+            progressDialog = new ProgressDialog(CommentCreateActivity.this);
+            progressDialog.setMessage("Creating Comment");
             progressDialog.setIndeterminate(false);
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -81,9 +80,9 @@ public class QuestionCreateActivity extends Activity {
         @Override
         protected String doInBackground(String... args){
             try{
-                String link = "https://locfeed.000webhostapp.com/android_connect/create_question.php";
-                String data = URLEncoder.encode("question_details", "UTF-8") + "=" +
-                        URLEncoder.encode(question_details, "UTF-8");
+                String link = "https://locfeed.000webhostapp.com/android_connect/create_comment.php";
+                String data = URLEncoder.encode("comment_details", "UTF-8") + "=" +
+                        URLEncoder.encode(comment_details, "UTF-8");
                 data += "&" + URLEncoder.encode("location_id", "UTF-8") + "=" +
                         URLEncoder.encode(location_id, "UTF-8");
                 data += "&" + URLEncoder.encode("user_id", "UTF-8") + "=" +
@@ -126,15 +125,14 @@ public class QuestionCreateActivity extends Activity {
             progressDialog.hide();
             System.out.println("onPost s:" + s);
             if(s.equals("Success!")){
-                Toast.makeText(getApplicationContext(), "Successfully Created Question", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), QuestionFeedActivity.class);
+                Toast.makeText(getApplicationContext(), "Successfully Created Comment", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), CommentFeedActivity.class);
                 intent.putExtra("LocationID", location_id);
                 intent.putExtra("id", id);
                 startActivity(intent);
             } else {
-                Toast.makeText(getApplicationContext(), "Error While Creating Question", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error While Creating Comment", Toast.LENGTH_LONG).show();
             }
         }
     }
-
 }

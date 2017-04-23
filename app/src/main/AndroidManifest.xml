@@ -29,7 +29,7 @@
         </activity>
         <activity android:name=".SplashScreen" />
         <activity android:name=".TestActivity" />
-        <activity android:name=".QuestionCreateActivity" >
+        <activity android:name=".CommentCreateActivity" >
 
         </activity>
         <activity android:name=".EventCreateActivity">
@@ -39,7 +39,7 @@
         <activity android:name=".ChooseActivity" >
 
         </activity>
-        <activity android:name=".QuestionFeedActivity"
+        <activity android:name=".CommentFeedActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 

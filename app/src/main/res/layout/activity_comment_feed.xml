@@ -16,18 +16,18 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/question_create_btn"
+                android:id="@+id/comment_create_btn"
                 android:layout_width="190dp"
-                android:text="Create Question"
+                android:text="Create Comment"
                 style="@style/button2"
-                android:onClick="onQuestionCreateClick"/>
+                android:onClick="onCommentCreateClick"/>
 
 
             <Button
                 android:id="@+id/refresh_question_feed"
                 android:layout_width="190dp"
                 android:text="Refresh Feed"
-                android:layout_toRightOf="@id/question_create_btn"
+                android:layout_toRightOf="@id/comment_create_btn"
                 style="@style/button3"
                 android:layout_alignParentRight="true"
                 android:onClick="OnRefresh"/>
@@ -36,7 +36,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_question" />
+    <include layout="@layout/content_comment" />
 
 
 </android.support.design.widget.CoordinatorLayout>

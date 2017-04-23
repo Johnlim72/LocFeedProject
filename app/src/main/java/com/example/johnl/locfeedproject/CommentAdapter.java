@@ -5,7 +5,6 @@ package com.example.johnl.locfeedproject;
  */
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +15,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class QuestionAdapter extends ArrayAdapter<QuestionModel> {
+public class CommentAdapter extends ArrayAdapter<CommentModel> {
 
-    private ArrayList<QuestionModel> dataSet;
+    private ArrayList<CommentModel> dataSet;
     Context mContext;
 
     // View lookup cache
     private static class ViewHolder {
-        TextView question;
+        TextView comment;
         TextView user;
         TextView userRep;
     }
 
-    public QuestionAdapter(ArrayList<QuestionModel> data, Context context) {
-        super(context, R.layout.row_question, data);
+    public CommentAdapter(ArrayList<CommentModel> data, Context context) {
+        super(context, R.layout.row_comment, data);
         this.dataSet = data;
         this.mContext=context;
     }
@@ -39,7 +38,7 @@ public class QuestionAdapter extends ArrayAdapter<QuestionModel> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        QuestionModel questionModel = getItem(position);
+        CommentModel commentModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
 
@@ -48,8 +47,8 @@ public class QuestionAdapter extends ArrayAdapter<QuestionModel> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.row_question, parent, false);
-            viewHolder.question = (TextView) convertView.findViewById(R.id.question);
+            convertView = inflater.inflate(R.layout.row_comment, parent, false);
+            viewHolder.comment = (TextView) convertView.findViewById(R.id.comment);
             viewHolder.user = (TextView) convertView.findViewById(R.id.user);
             viewHolder.userRep = (TextView) convertView.findViewById(R.id.userRep);
             result=convertView;
@@ -63,10 +62,10 @@ public class QuestionAdapter extends ArrayAdapter<QuestionModel> {
         result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.question.setText(questionModel.getQuestion());
-        viewHolder.user.setText(questionModel.getUser());
-        viewHolder.userRep.setText("  " + questionModel.getUserRep());
-        viewHolder.question.setTag(position);
+        viewHolder.comment.setText(commentModel.getComment());
+        viewHolder.user.setText(commentModel.getUser());
+        viewHolder.userRep.setText("  " + commentModel.getUserRep());
+        viewHolder.comment.setTag(position);
         // Return the completed view to render on screen
         return convertView;
     }
