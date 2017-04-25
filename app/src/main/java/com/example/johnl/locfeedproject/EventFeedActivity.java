@@ -89,7 +89,6 @@ public class EventFeedActivity extends AppCompatActivity {
             super.onPreExecute();
         }
 
-
         @Override
         protected Void doInBackground(Void... arg0) {
             try{
@@ -210,4 +209,5 @@ public class EventFeedActivity extends AppCompatActivity {
         intent.putExtra("id", id);
         startActivity(intent);
     }
+
 }
