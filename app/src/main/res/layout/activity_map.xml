@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.johnl.locfeedproject.MainActivity">
 
-    <!--<Button-->
-        <!--android:id="@+id/goToButton"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_margin="10dp"-->
-        <!--style="@style/button1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="Go to" />-->
-
-
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
@@ -33,5 +22,16 @@
         android:layout_centerHorizontal="true"
         android:paddingBottom="150dp"
         android:src="@drawable/templelogo" />
+
+    <TextView
+        android:id="@+id/help_text"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        style="@style/button1"
+        android:layout_height="20dp"
+        android:layout_width="250dp"
+        android:text="  Click window to go to location" />
+
 
 </RelativeLayout>

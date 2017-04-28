@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -54,7 +55,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         Bundle extras = getIntent().getExtras();
         id = "0";
-        if(extras != null){
+        if (extras != null) {
             id = extras.getString("id").toString();
         }
 
@@ -80,28 +81,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
      */
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         location_names = new ArrayList<String>();
         latitudes = new ArrayList<Double>();
         longitudes = new ArrayList<Double>();
         location_ids = new ArrayList<Integer>();
 
-        try{
+        try {
             String result = new GetLocations().execute().get();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
 
-
-        for(int i = 0; i < location_names.size(); i++){
+        for (int i = 0; i < location_names.size(); i++) {
             LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
             Marker marker = googleMap.addMarker(new MarkerOptions().position(newLocation).title(location_names.get(i)));
 
             mHashMap.put(marker, location_ids.get(i));
         }
 
-        LatLng middle = new LatLng(39.981469143334614,-75.15679478645325);
+        LatLng middle = new LatLng(39.981469143334614, -75.15679478645325);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(middle, 15));
         mUiSettings = googleMap.getUiSettings();
         mUiSettings.setZoomControlsEnabled(true);
@@ -111,25 +111,31 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                return false;
+            }
+        });
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
                 Intent bringFeed = new Intent(MapActivity.this, ChooseActivity.class);
                 bringFeed.putExtra("LocationID", mHashMap.get(marker).toString());
                 bringFeed.putExtra("id", id);
                 startActivity(bringFeed);
-                return false;
             }
         });
     }
 
-    private class GetLocations extends AsyncTask<Void, Void, String>{
+    private class GetLocations extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected String doInBackground(Void... arg0){
-            try{
+        protected String doInBackground(Void... arg0) {
+            try {
                 String link = "https://locfeed.000webhostapp.com/android_connect/get_locations.php";
                 URL url = new URL(link);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -137,35 +143,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 int responseCode = conn.getResponseCode();
 
-                if(responseCode == HttpURLConnection.HTTP_OK){
+                if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream in = new BufferedInputStream(conn.getInputStream());
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder sb = new StringBuilder();
 
                     String line;
-                    try{
-                        while((line = reader.readLine()) != null){
+                    try {
+                        while ((line = reader.readLine()) != null) {
                             sb.append(line).append('\n');
                         }
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
-                        try{
+                        try {
                             in.close();
-                        } catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
 
                     String jsonString = sb.toString();
 
-                    if(jsonString != null){
-                        try{
+                    if (jsonString != null) {
+                        try {
                             JSONObject jsonObject = new JSONObject(jsonString);
 
                             JSONArray locations = jsonObject.getJSONArray("locations");
 
-                            for(int i = 0; i < locations.length(); i++){
+                            for (int i = 0; i < locations.length(); i++) {
                                 JSONObject location = locations.getJSONObject(i);
                                 String location_name = location.getString("location_name");
                                 double latitude = Double.parseDouble(location.getString("latitude"));
@@ -181,7 +187,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 longitudes.add(longitude);
                                 location_ids.add(location_id);
                             }
-                        } catch(final JSONException e){
+                        } catch (final JSONException e) {
                             Log.e("JSON Error", "JSON Parsing Error: " + e.getMessage());
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -195,7 +201,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     }
                 }
 
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
 
@@ -203,7 +209,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         @Override
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             super.onPostExecute(result);
         }
     }
