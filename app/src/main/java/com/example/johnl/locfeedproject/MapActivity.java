@@ -1,5 +1,9 @@
 package com.example.johnl.locfeedproject;
 
+/**
+ * Created by johnl on 3/27/2017.
+ */
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;

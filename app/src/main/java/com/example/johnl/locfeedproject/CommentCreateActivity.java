@@ -50,6 +50,7 @@ public class CommentCreateActivity extends Activity {
         setContentView(R.layout.activity_comment_create);
     }
 
+    //creates comment and inserts into database
     public void createComment(View view){
         EditText comment_details_ET = (EditText) findViewById(R.id.comment_details);
 

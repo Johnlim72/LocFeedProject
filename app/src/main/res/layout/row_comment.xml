@@ -73,6 +73,15 @@
             android:layout_toRightOf="@id/userRep"
             android:text="+" />
 
+        <TextView
+            android:id="@+id/userID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/increment"
+            android:visibility="invisible"
+            />
     </LinearLayout>
 
     <Button

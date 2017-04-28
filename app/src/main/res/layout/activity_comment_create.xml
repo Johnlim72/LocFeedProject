@@ -9,36 +9,30 @@
         android:layout_height="match_parent"
         android:background="#2874a6"
         android:orientation="vertical"
-        android:visibility="visible"
-        >
+        android:visibility="visible">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Comment"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/title"
             style="@style/text1"
-            android:textColor="#FFFFFF"
             android:layout_marginTop="150dp"
-            />
+            android:text="Comment"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/comment_details"
             style="@style/editTextStyle2" />
 
         <Button
+            android:id="@+id/exec_comment_create"
             android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Create"
             android:background="@drawable/button_style"
-            android:onClick="createComment"/>
+            android:fontFamily="sans-serif-condensed"
+            android:onClick="createComment"
+            android:text="Create"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

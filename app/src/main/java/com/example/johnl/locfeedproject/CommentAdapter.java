@@ -25,8 +25,10 @@ public class CommentAdapter extends ArrayAdapter<CommentModel> {
         TextView comment;
         TextView user;
         TextView userRep;
+        TextView userID;
     }
 
+    //constructor
     public CommentAdapter(ArrayList<CommentModel> data, Context context) {
         super(context, R.layout.row_comment, data);
         this.dataSet = data;
@@ -35,6 +37,7 @@ public class CommentAdapter extends ArrayAdapter<CommentModel> {
 
     private int lastPosition = -1;
 
+    //returns the view used as a row in the ListView at a specfic position.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
@@ -51,6 +54,7 @@ public class CommentAdapter extends ArrayAdapter<CommentModel> {
             viewHolder.comment = (TextView) convertView.findViewById(R.id.comment);
             viewHolder.user = (TextView) convertView.findViewById(R.id.user);
             viewHolder.userRep = (TextView) convertView.findViewById(R.id.userRep);
+            viewHolder.userID = (TextView) convertView.findViewById(R.id.userID);
             result=convertView;
             convertView.setTag(viewHolder);
         } else {
@@ -65,6 +69,7 @@ public class CommentAdapter extends ArrayAdapter<CommentModel> {
         viewHolder.comment.setText(commentModel.getComment());
         viewHolder.user.setText(commentModel.getUser());
         viewHolder.userRep.setText("  " + commentModel.getUserRep());
+        viewHolder.userID.setText(commentModel.getUserID());
         viewHolder.comment.setTag(position);
         // Return the completed view to render on screen
         return convertView;

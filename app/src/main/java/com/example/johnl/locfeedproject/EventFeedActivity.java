@@ -1,5 +1,8 @@
 package com.example.johnl.locfeedproject;
 
+/**
+ * Created by johnl on 4/5/2017.
+ */
 
 import android.app.ProgressDialog;
 import android.content.Intent;

@@ -1,5 +1,9 @@
 package com.example.johnl.locfeedproject;
 
+/**
+ * Created by johnl on 3/22/2017.
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

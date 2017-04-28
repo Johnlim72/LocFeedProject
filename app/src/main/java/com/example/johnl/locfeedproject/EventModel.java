@@ -14,8 +14,7 @@ public class EventModel {
     String timeEnd;
     String date;
 
-
-    public EventModel(String name, String description, String user, String userRep, String timeStart, String timeEnd, String date ) {
+    public EventModel(String name, String description, String user, String userRep, String timeStart, String timeEnd, String date) {
         this.name=name;
         this.description=description;
         this.user=user;
@@ -49,5 +48,7 @@ public class EventModel {
     }
 
     public String getDate() { return date; }
+
 }
+
 

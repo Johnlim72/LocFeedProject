@@ -1,5 +1,9 @@
 package com.example.johnl.locfeedproject;
 
+/**
+ * Created by johnl on 4/5/2017.
+ */
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -85,6 +89,7 @@ public class CommentFeedActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //when 'refresh feed' button is clicked
     public void OnRefresh(View view) {
         Intent intent = new Intent(getApplicationContext(), CommentFeedActivity.class);
         intent.putExtra("LocationID", location_id);
@@ -161,8 +166,9 @@ public class CommentFeedActivity extends AppCompatActivity {
                                         String comment_details = comment.getString("comment_details");
                                         String user_id = comment.getString("user_id");
                                         String user_reputation = comment.getString("user_reputation");
+                                        String commenter_id = comment.getString("commenter_id");
 
-                                        commentModels.add(new CommentModel(comment_details, user_id, user_reputation));
+                                        commentModels.add(new CommentModel(comment_details, user_id, user_reputation, commenter_id));
                                     }
                                 } else{
                                     runOnUiThread(new Runnable() {
@@ -202,6 +208,7 @@ public class CommentFeedActivity extends AppCompatActivity {
         }
     }
 
+    //starts CommentCreateActivity
     public void onCommentCreateClick(View view){
         Intent intent = new Intent(getApplicationContext(), CommentCreateActivity.class);
         intent.putExtra("LocationID", location_id);

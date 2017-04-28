@@ -27,6 +27,7 @@ public class ChooseActivity extends AppCompatActivity {
 
         System.out.println("++====++++++++ ID in ChooseActivity: " + id);
 
+        //gets rid of title/toolbar on top of screen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_choose);
