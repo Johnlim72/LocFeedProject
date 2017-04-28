@@ -25,7 +25,7 @@ public class CommentAdapter extends ArrayAdapter<CommentModel> {
         TextView comment;
         TextView user;
         TextView userRep;
-        TextView userID;
+        TextView commenter_id;
     }
 
     //constructor
@@ -54,7 +54,7 @@ public class CommentAdapter extends ArrayAdapter<CommentModel> {
             viewHolder.comment = (TextView) convertView.findViewById(R.id.comment);
             viewHolder.user = (TextView) convertView.findViewById(R.id.user);
             viewHolder.userRep = (TextView) convertView.findViewById(R.id.userRep);
-            viewHolder.userID = (TextView) convertView.findViewById(R.id.userID);
+            viewHolder.commenter_id = (TextView) convertView.findViewById(R.id.commenter_id);
             result=convertView;
             convertView.setTag(viewHolder);
         } else {
@@ -69,7 +69,7 @@ public class CommentAdapter extends ArrayAdapter<CommentModel> {
         viewHolder.comment.setText(commentModel.getComment());
         viewHolder.user.setText(commentModel.getUser());
         viewHolder.userRep.setText("  " + commentModel.getUserRep());
-        viewHolder.userID.setText(commentModel.getUserID());
+        viewHolder.commenter_id.setText(commentModel.getCommenterID());
         viewHolder.comment.setTag(position);
         // Return the completed view to render on screen
         return convertView;

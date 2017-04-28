@@ -10,13 +10,13 @@ public class CommentModel {
     String comment;
     String user;
     String userRep;
-    String userID;
+    String commenter_id;
 
     public CommentModel(String comment, String user, String userRep, String userID  ) {
         this.comment=comment;
         this.user=user;
         this.userRep=userRep;
-        this.userID=userID;
+        this.commenter_id=commenter_id;
     }
 
     public String getComment() {
@@ -29,6 +29,6 @@ public class CommentModel {
 
     public String getUserRep() { return userRep; }
 
-    public String getUserID() { return userID; }
+    public String getCommenterID() { return commenter_id; }
 
 }
