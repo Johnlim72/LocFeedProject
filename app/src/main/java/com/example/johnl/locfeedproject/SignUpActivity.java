@@ -20,6 +20,7 @@ import java.net.URLEncoder;
  * Created by Monil on 3/22/17.
  */
 
+//Activity for users to sign up for LocFeed
 public class SignUpActivity extends AppCompatActivity{
 
     private String f_name, l_name, user_id, password, re_password;

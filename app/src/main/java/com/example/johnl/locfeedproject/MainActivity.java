@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+//Shows the login or sign up option
 public class MainActivity extends AppCompatActivity {
 
     @Override

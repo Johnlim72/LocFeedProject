@@ -23,6 +23,7 @@ import java.net.URLEncoder;
  * Created by Monil on 3/22/17.
  */
 
+//Users fill info in order to login using this activity
 public class LoginActivity extends AppCompatActivity{
 
     private String user_id, password;

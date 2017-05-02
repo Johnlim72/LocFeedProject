@@ -37,11 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-/**
- * An activity that displays a Google map with a marker (pin) to indicate a particular location.
- */
-
-
+//An activity that displays a Google map with a marker (pin) to indicate a particular location.
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private UiSettings mUiSettings;
@@ -73,16 +69,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
-    /**
-     * Manipulates the map when it's available.
-     * The API invokes this callback when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user receives a prompt to install
-     * Play services inside the SupportMapFragment. The API invokes this method after the user has
-     * installed Google Play services and returned to the app.
-     */
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
@@ -204,11 +190,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         }
                     }
                 }
-
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
-
             return null;
         }
 
