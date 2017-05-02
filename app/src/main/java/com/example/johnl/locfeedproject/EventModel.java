@@ -4,6 +4,7 @@ package com.example.johnl.locfeedproject;
  * Created by johnl on 4/5/2017.
  */
 
+//the object to be populated into the ListView by EventAdapter
 public class EventModel {
 
     String name;

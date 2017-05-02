@@ -30,6 +30,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+//Sets the EventAdapter to the listview
+//Gets the events for the specific location
 public class EventFeedActivity extends AppCompatActivity {
 
     ArrayList<EventModel> eventModels;
@@ -77,6 +79,7 @@ public class EventFeedActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //On refresh feed button click
     public void OnRefresh(View view) {
         Intent intent = new Intent(getApplicationContext(), EventFeedActivity.class);
         intent.putExtra("LocationID", location_id);
@@ -206,11 +209,11 @@ public class EventFeedActivity extends AppCompatActivity {
 
     }
 
+    //Goes to activity to create event
     public void onCreateEventClick(View view){
         Intent intent = new Intent(getApplicationContext(), EventCreateActivity.class);
         intent.putExtra("LocationID", location_id);
         intent.putExtra("id", id);
         startActivity(intent);
     }
-
 }

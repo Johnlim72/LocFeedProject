@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+//Populates the list view with the EventModel as the object
 public class EventAdapter extends ArrayAdapter<EventModel> {
 
     private ArrayList<EventModel> dataSet;

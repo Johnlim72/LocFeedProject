@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+//Populates the list view with the CommentModel as the object
 public class CommentAdapter extends ArrayAdapter<CommentModel> {
 
     private ArrayList<CommentModel> dataSet;

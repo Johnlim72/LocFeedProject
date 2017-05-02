@@ -12,7 +12,7 @@ public class CommentModel {
     String userRep;
     String commenter_id;
 
-    public CommentModel(String comment, String user, String userRep, String userID  ) {
+    public CommentModel(String comment, String user, String userRep, String commenter_id  ) {
         this.comment=comment;
         this.user=user;
         this.userRep=userRep;

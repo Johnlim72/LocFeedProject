@@ -31,6 +31,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+//Sets the CommentAdapter to the listview
+//Gets the comments for the specific location
 public class CommentFeedActivity extends AppCompatActivity {
 
     ArrayList<CommentModel> commentModels;
@@ -68,7 +70,7 @@ public class CommentFeedActivity extends AppCompatActivity {
         progressDialog.show();
 
         new GetComments().execute();
-
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

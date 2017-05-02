@@ -134,34 +134,6 @@
             android:text=", "
             android:textColor="#17202a" />
 
-
-        <Button
-            android:id="@+id/commentslogo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/comments_logo" />
-
-        <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="12dp"
-            android:layout_toLeftOf="@id/commentslogo"
-            android:background="@drawable/pencil_logo" />
-
-
-        <Button
-            android:id="@+id/decrement"
-            style="@style/button1"
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@id/comma"
-            android:text="-" />
-
-
         <TextView
             android:id="@+id/userRep"
             style="@style/text2"
@@ -170,20 +142,9 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
-            android:layout_toRightOf="@id/decrement"
+            android:layout_toRightOf="@id/comma"
             android:text="4.3"
             android:textColor="#17202a" />
-
-        <Button
-            android:id="@+id/increment"
-            style="@style/button1"
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/userRep"
-            android:text="+" />
-
 
     </RelativeLayout>
 
