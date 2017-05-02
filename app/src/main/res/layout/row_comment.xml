@@ -59,7 +59,6 @@
             android:layout_height="wrap_content"
             android:text="50"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@id/increment"
             android:visibility="invisible"
             />
     </LinearLayout>
